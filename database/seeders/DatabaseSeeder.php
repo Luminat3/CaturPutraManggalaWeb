@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('barang')->insert([
+            ['id' => '001', 'nama_barang'=> 'beton', 'jumlah' => rand(0,100)],
+            ['id' => '002', 'nama_barang'=> 'pagar', 'jumlah' => rand(0,100)],
+            ['id' => '003', 'nama_barang'=> 'semen', 'jumlah' => rand(0,100)],
+            ['id' => '004', 'nama_barang'=> 'dinding', 'jumlah' => rand(0,100)],
+            ['id' => '005', 'nama_barang'=> 'batu bata', 'jumlah' => rand(0,100)],
+        ]);
+    
+        DB::table('users')->insert(['id'=> '01', 'name'=>'admin', 'email'=>'admin@gmail.com', 'password'=>bcrypt('admin')]);
     }
+
+    
 }
