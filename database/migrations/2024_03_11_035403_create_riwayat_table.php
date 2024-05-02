@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('riwayat', function (Blueprint $table) {
             $table->id();
-            $table->id('company_id');
-            $table->id('id_barang');
+            $table->foreignId('company_id')->references('id')->on('company');
+            $table->foreignId('id_barang')->references('id')->on('stock');
             $table->string('nama_barang');
             $table->string('nama_company');
             $table->integer('jumlah_barang');
