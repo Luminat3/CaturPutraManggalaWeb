@@ -4,6 +4,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/stocks', [StockController::class, 'show']);
     Route::get('/dashboard/history', [HistoryController::class, 'show']);
     Route::get('/dashboard/transaction', [TransactionController::class, 'show']);
-    Route::get('/dashboard/customer', [StockController::class, 'show']);
+    Route::get('/dashboard/customer', [CustomerController::class, 'show']);
 });
 
 require __DIR__.'/auth.php';

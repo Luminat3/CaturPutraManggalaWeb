@@ -7,6 +7,9 @@
 @stop
 
 @section('content')
+<!-- TODO :
+    Buat Form untuk melakukan transaksi
+    Buat API POST untuk create data baru -->
     <p>Welcome to this beautiful admin panel.</p>
 @stop
 

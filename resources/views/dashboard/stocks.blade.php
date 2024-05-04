@@ -2,25 +2,45 @@
 
 @section('title', 'Dashboard')
 
-@section('content_header')
-    <h1>Stok Barang</h1>
-@stop
-
 @section('content')
-    <table border="3">
+    <!-- <table border="3">
         <tr>
-            <td width='100px'>Id Barang</td>
-            <td width='180px'>Nama Barang</td>
-            <td width='120px'>Jumlah Barang</td>
+            
         </tr>
-        @foreach($stock as $stock)
-        <tr>
-            <td>{{$stock['id']}}</td>
-            <td>{{$stock['nama_barang']}}</td>
-            <td>{{$stock['jumlah']}}</td>
-        </tr>
-        @endforeach
-    </table>
+        
+    </table> -->
+
+    <div class="card">
+                <div class="card-header">
+                <h3 class="card-title">Stok Barang</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Id Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah Barang</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($stock as $stock)
+                    <tr>
+                        <td>{{$stock['id']}}</td>
+                        <td>{{$stock['nama_barang']}}</td>
+                        <td>{{$stock['jumlah']}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+
+
 @stop
 
 @section('css')
