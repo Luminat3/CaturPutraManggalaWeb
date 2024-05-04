@@ -256,8 +256,8 @@ return [
     |
     */
 
-    'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'use_route_url' => true,
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -326,17 +326,17 @@ return [
         [
             'text' => 'Stocks',
             'icon' => 'fas fa-fw fa-boxes',
-            'url' => '#',
+            'url' => 'dashboard/stocks',
         ],  
         [
             'text' => 'Transactions',
             'icon' => 'fas fa-fw fa-exchange-alt',
-            'url' => '#',
+            'url' => 'dashboard/transaction',
         ],
         [
             'text' => 'History',
             'icon' => 'fas fa-fw fa-history',
-            'url' => '#',
+            'url' => 'dashboard/history',
         ],
 
         ['header' => 'Information'],
@@ -346,13 +346,8 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url' => 'user/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
             'text' => 'Customer',
-            'url' => 'user/settings',
+            'url' => 'dashboard/customer',
             'icon' => 'fas fa-fw fa-building',
         ],
         // [
