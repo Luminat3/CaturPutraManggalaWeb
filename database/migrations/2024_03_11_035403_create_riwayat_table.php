@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->references('id')->on('customer');
             $table->foreignId('id_barang')->references('id')->on('barang');
-            $table->string('nama_barang');
             $table->string('nama_company');
-            $table->integer('jumlah_barang');
             $table->date('tanggal_transaksi');
             $table->date('tanggal_lunas');
             $table->string('invoice');
