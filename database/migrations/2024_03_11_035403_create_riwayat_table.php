@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('riwayat', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->references('id')->on('company');
+            $table->foreignId('customer_id')->references('id')->on('customer');
             $table->foreignId('id_barang')->references('id')->on('barang');
             $table->string('nama_barang');
             $table->string('nama_company');
             $table->integer('jumlah_barang');
+            $table->date('pelunasan');
+            $table->string('invoice');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

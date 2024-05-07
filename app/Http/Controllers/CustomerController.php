@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -9,6 +10,7 @@ class CustomerController extends Controller
 {
     public function show(): View
     {
-        return view('dashboard.customer');
+        $customer = Customer::all();
+        return view('dashboard.customer', ['customer'=>$customer]);
     }
 }
