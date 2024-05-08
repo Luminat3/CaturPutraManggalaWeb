@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('detail_riwayat', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_transaksi')->references('id')->on('riwayat');
-            $table->foreignId('id_barang')->references('id')->on('stock');
+            $table->foreignId('id_barang')->references('id')->on('barang');
             $table->string('nama_barang');
             $table->integer('jumlah');
             $table->boolean('status'); //barang sudah selesai dikirim atau belum
