@@ -33,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/stocks', [StockController::class, 'show']);
     Route::get('/dashboard/history', [HistoryController::class, 'show']);
     Route::get('/dashboard/transaction', [TransactionController::class, 'show']);
-    Route::get('/dashboard/customer', [CustomerController::class, 'show']);
+    Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::get('/dashboard/customer/create', [CustomerController::class, 'create_view']);
+    Route::post('/dashboard/customer/create', [CustomerController::class, 'add']);   
 });
 
 require __DIR__.'/auth.php';

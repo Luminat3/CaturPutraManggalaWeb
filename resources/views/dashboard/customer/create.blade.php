@@ -18,21 +18,22 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+            <form action="/dashboard/customer/create" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
                     <div class="form-group">
                         <label for="inputPelanggan">Nama Pelanggan</label>
-                        <input type="string" class="form-control" id="inputPelanggan" placeholder="Masukkan nama pelanggan">
+                        <input type="text" class="form-control" id="inputPelanggan" name="customer_name" placeholder="Masukkan nama pelanggan">
                     </div>
 
                     <div class="form-group">
                         <label for="inputAlamat">Alamat</label>
-                        <input type="password" class="form-control" id="inputAlamat" placeholder="Masukkan Alamat">
+                        <input type="text" class="form-control" id="inputAlamat" name="lokasi" placeholder="Masukkan Alamat">
                     </div>
 
                     <div class="form-group">
                         <label for="inputTelepon">Nomor Telepon</label>
-                        <input type="password" class="form-control" id="inputTelepon" placeholder="Masukkan Nomor Telepon">
+                        <input type="tel" class="form-control" id="inputTelepon" name="nomor_telepon" placeholder="Masukkan Nomor Telepon">
                     </div>
 
                     <!-- <div class="form-check">

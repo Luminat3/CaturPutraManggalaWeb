@@ -26,7 +26,7 @@
         @foreach($customer as $customer)
           <tr>
               <td>{{$customer['id']}}</td>
-              <td>{{$customer['company_name']}}</td>
+              <td>{{$customer['customer_name']}}</td>
               <td>{{$customer['lokasi']}}</td>
               <td>{{$customer['nomor_telepon']}}</td>
           </tr>
@@ -36,7 +36,7 @@
     </div>
               <!-- /.card-body -->
   </div>
-  <button type="submit" class="btn btn-primary">Add Customer</button>
+  <a class="btn btn-primary" href="/dashboard/customer/create">Add Customer</a>
 @stop
 
 
