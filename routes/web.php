@@ -33,9 +33,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/stocks', [StockController::class, 'show']);
     Route::get('/dashboard/history', [HistoryController::class, 'show']);
     Route::get('/dashboard/transaction', [TransactionController::class, 'show']);
-    Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer');
-    Route::get('/dashboard/customer/create', [CustomerController::class, 'create_view']);
-    Route::post('/dashboard/customer/create', [CustomerController::class, 'add']);   
+    Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer'); //routing ke lihat data pelanggan
+    Route::get('/dashboard/customer/create', [CustomerController::class, 'create_view']); //routing ke halaman tambah data pelanggan
+    Route::post('/dashboard/customer/create', [CustomerController::class, 'add']); //tambah data pelanggan
+    Route::get('/dashboard/customer/get/{id}', [CustomerController::class, 'getData']); //routing ke halaman edit data pelanggan
+    Route::post('/dashboard/customer/edit/{id}', [CustomerController::class, 'updateData']); //ubah data pelanggan
+    Route::get('/dashboard/customer/delete/{id}', [CustomerController::class, 'deleteData']);
 });
 
 require __DIR__.'/auth.php';

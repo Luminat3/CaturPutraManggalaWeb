@@ -25,13 +25,24 @@ class CustomerController extends Controller
         return redirect()->route('customer');
     }
 
-    public function getData()
+    public function getData($id)
     {
-
+        $data = Customer::find($id);
+        return view('dashboard.customer.edit', compact('data'));
     }
 
-    public function deleteData()
+    public function updateData(Request $request, $id)
     {
-
+        $data = Customer::find($id);
+        $data->update($request->all());
+        return redirect()->route('customer');
     }
+
+    public function deleteData($id)
+    {
+        $data = Customer::find($id);
+        $data->delete();
+        return redirect()->route('customer');
+    }
+
 }

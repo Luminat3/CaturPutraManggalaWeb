@@ -16,10 +16,11 @@
       <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
-          <th>ID Pelanggan</th>
-          <th>Nama Pelanggan</th>
-          <th>Lokasi</th>
-          <th>Nomor Telepon</th>
+          <th class="col-1">ID Pelanggan</th>
+          <th class="col-2">Nama Pelanggan</th>
+          <th class="col-3">Lokasi</th>
+          <th class="col-4">Nomor Telepon</th>
+          <th class="col-4">Edit/Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,10 @@
               <td>{{$customer['customer_name']}}</td>
               <td>{{$customer['lokasi']}}</td>
               <td>{{$customer['nomor_telepon']}}</td>
+              <td>
+                <a href="/dashboard/customer/get/{{$customer->id}}" class="btn btn-warning">Edit</a>
+                <a href="/dashboard/customer/delete/{{$customer->id}}" class="btn btn-danger">Delete</a>
+              </td>
           </tr>
           @endforeach
         </tbody>
