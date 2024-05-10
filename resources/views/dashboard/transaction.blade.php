@@ -20,13 +20,37 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="namaCustomer">Nama Pelanggan</label>
-                    <input type="email" class="form-control" id="namaCustomer" placeholder="Pilih nama Customer">
+                    <label for="namaCustomer">Nama Pelanggan :</label>
+                    <select class="custom-select rounded-0" id="namaCustomer">
+                        <option></option>
+                        <option>Value 1</option>
+                        <option>Value 2</option>
+                        <option>Value 3</option>
+                    </select>   
                 </div>
 
+                <div class="form-row">
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <label for="namaBarang">Item :</label>
+                            <select class="custom-select rounded-0" id="namaBarang">
+                                <option></option>
+                                <option>Value 1</option>
+                                <option>Value 2</option>
+                                <option>Value 3</option>
+                            </select>   
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <label for="inputJumlah">&zwnj;</label>
+                            <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Jumlah ">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
-                    <label for="exampleInputFile">Invoice</label>
+                    <label for="exampleInputFile">Invoice :</label>
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="exampleInputFile">
