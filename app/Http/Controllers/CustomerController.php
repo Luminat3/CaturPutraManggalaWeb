@@ -11,6 +11,6 @@ class CustomerController extends Controller
     public function show(): View
     {
         $customer = Customer::all();
-        return view('dashboard.customer', ['customer'=>$customer]);
+        return view('dashboard.customer.index', ['customer'=>$customer]);
     }
 }
