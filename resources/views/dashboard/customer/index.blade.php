@@ -16,10 +16,10 @@
       <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
-          <th class="col-1">ID Pelanggan</th>
+          <th class="col-2">ID Pelanggan</th>
           <th class="col-2">Nama Pelanggan</th>
           <th class="col-3">Lokasi</th>
-          <th class="col-4">Nomor Telepon</th>
+          <th class="col-3">Nomor Telepon</th>
           <th class="col-4">Edit/Delete</th>
         </tr>
         </thead>
