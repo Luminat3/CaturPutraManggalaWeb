@@ -29,6 +29,8 @@
                     </select>   
                 </div>
 
+                <!-- TODO
+                Buat Repeater untuk item yang dibuat-->
                 <div class="form-row">
                     <div class="col-auto">
                         <div class="form-group">
