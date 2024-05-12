@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <!-- TODO :
     Buat Form untuk melakukan transaksi
     Buat API POST untuk create data baru -->
@@ -32,9 +33,9 @@
                 <!-- TODO
                 Buat Repeater untuk item yang dibuat-->
                 <div class="form-row">
+                <label for="namaBarang">Item :</label>
                     <div class="col-auto">
                         <div class="form-group">
-                            <label for="namaBarang">Item :</label>
                             <select class="custom-select rounded-0" id="namaBarang">
                                 <option></option>
                                 <option>Value 1</option>
@@ -49,6 +50,9 @@
                             <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Jumlah ">
                         </div>
                     </div>
+
+                    <button type="button" id="tambah_barang" name="tambah_barang" class="btn btn-success">Tambah Barang</button>
+
                 </div>
 
                 <div class="form-group">
@@ -91,6 +95,14 @@
             </div>
         </form>
     </div>
+
+
+    <script>
+        var i = 0;
+        $('#tambah_barang').click(function(){
+            ++i;
+        })
+    </script>
 @stop
 
 @section('css')
