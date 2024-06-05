@@ -30,7 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/dashboard/stocks', [StockController::class, 'show']);
+    Route::get('/dashboard/stocks', [StockController::class, 'show'])->name('stocks');//get data stock
+    Route::get('/dashboard/stocks/create', [StockController::class, 'create_view']);
+    Route::post('/dashboard/stocks/create', [StockController::class, 'create']);//create barang baru
+    Route::post('/dashboard/stocks/add', [StockController::class, 'add']);//menambahkan jumlah stock
     Route::get('/dashboard/history', [HistoryController::class, 'show']);
     Route::get('/dashboard/transaction', [TransactionController::class, 'show']);
     Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer'); //routing ke lihat data pelanggan

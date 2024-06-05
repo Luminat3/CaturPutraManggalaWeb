@@ -21,12 +21,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($riwayat as $riwayat)
+                    @foreach($transaksi as $transaksit)
                         <tr>
-                            <td>{{$riwayat['id']}}</td>
-                            <td>{{$riwayat['company_name']}}</td>
-                            <td>{{$riwayat['lokasi']}}</td>
-                            <td>{{$riwayat['nomor_telepon']}}</td>
+                            <td>{{$transaksi['id']}}</td>
+                            <td>{{$transaksi['company_name']}}</td>
+                            <td>{{$transaksi['lokasi']}}</td>
+                            <td>{{$transaksi['nomor_telepon']}}</td>
                         </tr>
                     @endforeach
                 </tbody>

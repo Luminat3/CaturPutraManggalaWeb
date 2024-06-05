@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Riwayat;
+
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Transaksi;
 
 class HistoryController extends Controller
 {
     public function show(): View
     {
-        $riwayat = Riwayat::all();
-        return view('dashboard.history', ['riwayat'=>$riwayat]);
+        $transaksi = Transaksi::all();
+        return view('dashboard.history', ['transaksi'=>$transaksi]);
     }
 }
