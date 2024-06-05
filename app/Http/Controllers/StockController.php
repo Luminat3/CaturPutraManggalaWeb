@@ -11,6 +11,6 @@ class StockController extends Controller
     public function show(): View
     {
         $stock_barang = Stock::all();
-        return view('dashboard.stocks', ['stock'=>$stock_barang]);
+        return view('dashboard.stock.index', ['stock'=>$stock_barang]);
     }
 }

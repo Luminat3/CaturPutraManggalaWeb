@@ -12,9 +12,6 @@
     Buat Form untuk melakukan transaksi
     Buat API POST untuk create data baru -->
     <div class="card card-primary">
-        <div class="card-header">
-            <h3 class="card-title">Formulir Transaksi</h3>
-        </div>
         <!-- /.card-header -->
         <!-- form start -->
         <form action = "/" method="POST">
@@ -23,40 +20,49 @@
                 <div class="form-group">
                     <label for="namaCustomer">Nama Pelanggan :</label>
                     <select class="custom-select rounded-0" id="namaCustomer">
-                        <option></option>
-                        <option>Value 1</option>
-                        <option>Value 2</option>
-                        <option>Value 3</option>
+                        <option>--Pilih Pelanggan--</option> 
+                        @foreach($customer as $customer)
+                            <option>{{$customer['customer_name']}}</option> 
+                        @endforeach
                     </select>   
                 </div>
 
                 <!-- TODO
                 Buat Repeater untuk item yang dibuat-->
-                <div class="form-row">
-                <label for="namaBarang">Item :</label>
-                    <div class="col-auto">
-                        <div class="form-group">
-                            <select class="custom-select rounded-0" id="namaBarang">
-                                <option></option>
-                                <option>Value 1</option>
-                                <option>Value 2</option>
-                                <option>Value 3</option>
-                            </select>   
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="form-group">
-                            <label for="inputJumlah">&zwnj;</label>
-                            <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Jumlah ">
-                        </div>
-                    </div>
+                <label for="">Item :</label>
+                <a class="btn btn-success my-2" id="tambah_barang">Tambah Item</a>
+                <table id="tabel_barang" class="table border-0">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <select class="custom-select rounded-0" id="namaBarang" name="namaBarang">
+                                    <option>--Pilih Barang--</option> 
+                                    @foreach($stock as $stock)
+                                        <option>{{$stock['nama_barang']}}</option> 
+                                    @endforeach
+                                </select>   
+                            </div>
+                        </td>
 
-                    <button type="button" id="tambah_barang" name="tambah_barang" class="btn btn-success">Tambah Barang</button>
+                        <td>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="inputJumlah" name="inputJumlah" placeholder="Jumlah ">
+                            </div>
+                        </td>
 
-                </div>
+                        <td>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="inputHarga" name="inputHarga" placeholder="Harga ">
+                            </div>
+                        </td>
+                        <td>
+                        <a type="button" class="btn btn-danger invisible">X</a>
+                        </td>
+                    </tr>
+                </table>
 
                 <div class="form-group">
-                    <label for="exampleInputFile">Invoice :</label>
+                    <label for="exampleInputFile">Purchase Order :</label>
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="exampleInputFile">
@@ -91,7 +97,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit & Download Invoice</button>
             </div>
         </form>
     </div>
@@ -101,7 +107,43 @@
         var i = 0;
         $('#tambah_barang').click(function(){
             ++i;
-        })
+                $('#tabel_barang').append(
+                `<tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="custom-select rounded-0" id="namaBarang[`+i+`]" name="namaBarang">
+                                <option></option>
+                                <option>Value 1</option>
+                                <option>Value 2</option>
+                                <option>Value 3</option>
+                            </select>   
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="inputJumlah" name="inputJumlah[`+i+`]" placeholder="Jumlah ">
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="inputHarga" name="inputHarga[`+i+`]" placeholder="Harga ">
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <a type="button" class="btn btn-danger remove-table-row">X</a>
+                        </div>
+                    </td>
+                </tr>`
+            );
+        });
+
+        $(document).on('click', '.remove-table-row', function(){
+            $(this).parents('tr').remove();
+        });
     </script>
 @stop
 

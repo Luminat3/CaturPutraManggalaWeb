@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_riwayat', function (Blueprint $table) {
+        Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_transaksi')->references('id')->on('riwayat');
+            $table->foreignId('customer_id')->references('id')->on('customer');
             $table->foreignId('id_barang')->references('id')->on('barang');
-            $table->string('nama_barang');
-            $table->integer('jumlah');
-            $table->boolean('status'); //barang sudah selesai dikirim atau belum
+            $table->string('nama_customer');
+            $table->date('tanggal_transaksi');
+            $table->date('tanggal_lunas');
+            $table->string('PO');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_riwayat');
+        Schema::dropIfExists('riwayat');
     }
 };
