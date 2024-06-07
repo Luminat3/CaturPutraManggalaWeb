@@ -22,15 +22,38 @@
                     <select class="custom-select rounded-0" id="namaCustomer">
                         <option>--Pilih Pelanggan--</option> 
                         @foreach($customer as $customer)
-                            <option>{{$customer['customer_name']}}</option> 
+                            <option>{{$customer['customer_name']}}, {{$customer['lokasi']}}</option> 
                         @endforeach
                     </select>   
                 </div>
 
                 <!-- TODO
                 Buat Repeater untuk item yang dibuat-->
-                <label for="">Item :</label>
-                <a class="btn btn-success my-2" id="tambah_barang">Tambah Item</a>
+                <table id="stockTable" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Id Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah Barang</th>
+                        <th>Harga</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{-- @foreach($stock as $stock)
+                        <tr>
+                            <td>{{$stock['id']}}</td>
+                            <td>{{$stock['nama_barang']}}</td>
+                            <td>{{$stock['jumlah']}}</td>
+                            <td>
+                                <div class="form-group">
+                                    <label for="inputAlamat">Jumlah Awal Barang</label>
+                                    <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Masukkan Jumlah Barang">
+                                </div>
+                            </td>
+                        </tr>
+                      @endforeach --}}
+                    </tbody>
+                  </table>
 
                 <div class="form-group">
                     <label for="exampleInputFile">Purchase Order :</label>

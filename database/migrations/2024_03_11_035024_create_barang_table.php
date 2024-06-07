@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->integer('jumlah')->nullable();
-            $table->integer('harga');
+            $table->integer('harga_modal');
             $table->timestamps();
         });
     }

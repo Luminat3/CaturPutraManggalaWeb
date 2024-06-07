@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_transaksi', function (Blueprint $table) {
+        Schema::create('modal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_barang')->references('id')->on('barang');
-            $table->foreignId('id_customer')->references('id')->on('customer');
-            $table->string('nama_barang')->references('nama_barang')->on('barang');
-            $table->integer('jumlah');
+            $table->foreignId('id_customer')->reference('id')->on('customer');
+            $table->integer('akumulasi_modal');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_transaksi');
+        Schema::dropIfExists('modal');
     }
 };

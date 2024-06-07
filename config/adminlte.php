@@ -327,14 +327,19 @@ return [
             'text' => 'Stocks',
             'icon' => 'fas fa-fw fa-boxes',
             'url' => 'dashboard/stock',
+        ],
+        [
+            'text' => 'Pengeluaran Akumulasi',
+            'icon' => 'fas fa-fw fa-cart-plus',
+            'url' => 'dashboard/akumulasi',
         ],  
         [
-            'text' => 'Transactions',
+            'text' => 'Buat Invoice',
             'icon' => 'fas fa-fw fa-exchange-alt',
             'url' => 'dashboard/transaction',
         ],
         [
-            'text' => 'History',
+            'text' => 'Riwayat',
             'icon' => 'fas fa-fw fa-history',
             'url' => 'dashboard/history',
         ],

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Stock;
 use App\Models\Customer;
+use App\Models\DetailTransaksi;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -14,6 +16,7 @@ class TransactionController extends Controller
     {
         $stock_barang = Stock::all();
         $customer = Customer::all();
-        return view('dashboard.transaction',['stock'=>$stock_barang, 'customer' => $customer]);
+        $detail_transaksi = DetailTransaksi::all();
+        return view('dashboard.transaction',['stock'=>$stock_barang, 'customer' => $customer, 'detail_transaksi'=>$detail_transaksi]);
     }
 }

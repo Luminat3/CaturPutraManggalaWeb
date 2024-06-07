@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkumulasiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StockController;
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/customer/get/{id}', [CustomerController::class, 'getData']); //routing ke halaman edit data pelanggan
     Route::post('/dashboard/customer/edit/{id}', [CustomerController::class, 'updateData']); //ubah data pelanggan
     Route::get('/dashboard/customer/delete/{id}', [CustomerController::class, 'deleteData']);//delete customer
+    Route::get('/dashboard/akumulasi', [AkumulasiController::class, 'show']); //menampilkan halaman akumulasi untuk per proyek
 });
 
 require __DIR__.'/auth.php';

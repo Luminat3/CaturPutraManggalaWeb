@@ -30,6 +30,11 @@
                         <label for="inputAlamat">Jumlah Awal Barang</label>
                         <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Masukkan Jumlah Barang">
                     </div>
+
+                    <div class="form-group">
+                        <label for="inputAlamat">Harga Modal</label>
+                        <input type="number" class="form-control" id="inputHargaModal" name="harga_modal" placeholder="Masukkan Harga Modal Barang">
+                    </div>
                     <!-- <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
