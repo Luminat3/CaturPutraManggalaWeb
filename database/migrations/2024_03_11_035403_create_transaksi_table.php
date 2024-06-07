@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->references('id')->on('customer');
-            $table->foreignId('id_barang')->references('id')->on('barang');
             $table->string('nama_customer');
             $table->date('tanggal_transaksi');
             $table->date('tanggal_lunas');

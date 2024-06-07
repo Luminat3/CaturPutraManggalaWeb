@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAlamat">Alamat</label>
+                        <label for="inputAlamat">Lokasi</label>
                         <input type="text" class="form-control" id="inputAlamat" name="lokasi" placeholder="Masukkan Alamat">
                     </div>
 

@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Transaksi</h1>
+    <h1>Tambah Stock</h1>
 @stop
 
 @section('content')
@@ -14,29 +14,41 @@
     <div class="card card-primary">
         <!-- /.card-header -->
         <!-- form start -->
-        <form action = "/" method="POST">
+        <form action = "/dashboard/stock/add" method="POST">
             @csrf
             <div class="card-body">
-                <div class="form-group">
-                    <label for="namaCustomer">Nama Pelanggan :</label>
-                    <select class="custom-select rounded-0" id="namaCustomer">
-                        <option>--Pilih Pelanggan--</option> 
-                        @foreach($customer as $customer)
-                            <option>{{$customer['customer_name']}}</option> 
-                        @endforeach
-                    </select>   
-                </div>
-
-                <!-- TODO
-                Buat Repeater untuk item yang dibuat-->
                 <label for="">Item :</label>
                 <a class="btn btn-success my-2" id="tambah_barang">Tambah Item</a>
+                <table id="tabel_barang" class="table border-0">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <select class="custom-select rounded-0" id="namaBarang" name="nama_barang">
+                                    <option>--Pilih Barang--</option> 
+                                    @foreach($stock as $st)
+                                        <option>{{$st['nama_barang']}}</option> 
+                                    @endforeach
+                                </select>   
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Jumlah ">
+                            </div>
+                        </td>
+                        
+                        <td>
+                        <a type="button" class="btn btn-danger invisible">X</a>
+                        </td>
+                    </tr>
+                </table>
 
                 <div class="form-group">
-                    <label for="exampleInputFile">Purchase Order :</label>
+                    <label for="exampleInputFile">Bukti Pembelian :</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                            <input type="file" class="custom-file-input" id="exampleInputFile" name = "nota">
                             <label class="custom-file-label" for="exampleInputFile">Pilih File Invoice / Nota</label>
                         </div>
                         <div class="input-group-append">
@@ -68,15 +80,45 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit & Download Invoice</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
 
 
     <script>
+        var i = 0;
+        $('#tambah_barang').click(function(){
+            ++i;
+                $('#tabel_barang').append(
+                `<tr>
+                        <td>
+                            <div class="form-group">
+                                <select class="custom-select rounded-0" id="namaBarang" name="nama_barang">
+                                    <option>--Pilih Barang--</option> 
+                                    @foreach($stock as $st)
+                                        <option>{{$st['nama_barang']}}</option> 
+                                    @endforeach
+                                </select>   
+                            </div>
+                        </td>
 
+                        <td>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Jumlah ">
+                            </div>
+                        </td>
+                        
+                        <td>
+                        <a type="button" class="btn btn-danger remove-table-row">X</a>
+                        </td>
+                    </tr>`
+            );
+        });
 
+        $(document).on('click', '.remove-table-row', function(){
+            $(this).parents('tr').remove();
+        });
     </script>
 @stop
 

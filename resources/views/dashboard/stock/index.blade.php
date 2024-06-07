@@ -12,12 +12,12 @@
 
     <div class="card">
                 <div class="card-header">
-                <h3 class="card-title">Stok Barang</h3>
+                <h1 class="card-title">Stok Barang</h1>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <a class="btn btn-primary my-2" href="/dashboard/stocks/add">Tambah Stock</a> 
-                <a class="btn btn-primary my-2" href="/dashboard/stocks/create">Tambah Item</a>
+                <a class="btn btn-primary my-2" href="/dashboard/stock/add">Tambah Stock</a> 
+                <a class="btn btn-primary my-2" href="/dashboard/stock/create">Tambah Item</a>
                 <table id="stockTable" class="table table-bordered table-hover">
                   <thead>
                     <tr>

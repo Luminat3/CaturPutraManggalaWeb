@@ -13,6 +13,11 @@ class StockController extends Controller
         $stock_barang = Stock::all();
         return view('dashboard.stock.index', ['stock'=>$stock_barang]);
     }
+    
+    public function create_view(): View
+    {
+        return view('dashboard.stock.create');
+    }
 
     public function create(Request $request)
     {
@@ -20,10 +25,16 @@ class StockController extends Controller
         return redirect()->route('stocks');
     }
 
-    public function create_view(): View
+    public function add_view(): View
     {
-        return view('dashboard.stock.create');
+        $stock_barang = Stock::all();
+        return view('dashboard.stock.add', ['stock'=>$stock_barang]);
+    }
+
+    public function add(Request $request, $id)
+    {
+        $data = Stock::find($id);
+        $data -> update($request->all());
+        return redirect()->route('stocks');
     }
 }
-
-

@@ -326,7 +326,7 @@ return [
         [
             'text' => 'Stocks',
             'icon' => 'fas fa-fw fa-boxes',
-            'url' => 'dashboard/stocks',
+            'url' => 'dashboard/stock',
         ],  
         [
             'text' => 'Transactions',

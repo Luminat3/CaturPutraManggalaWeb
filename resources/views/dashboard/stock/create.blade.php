@@ -18,7 +18,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/dashboard/stocks/create" method="POST" enctype="multipart/form-data">
+            <form action="/dashboard/stock/create" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">

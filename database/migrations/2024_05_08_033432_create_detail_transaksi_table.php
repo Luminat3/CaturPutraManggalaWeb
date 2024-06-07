@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('detail_transaksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_transaksi')->references('id')->on('transaksi');
             $table->foreignId('id_barang')->references('id')->on('barang');
-            $table->string('nama_barang');
+            $table->foreignId('id_customer')->references('id')->on('customer');
+            $table->foreignId('id_transaksi')->references('id')->on('transaksi');
+            $table->string('nama_barang')->references('nama_barang')->on('barang');
             $table->integer('jumlah');
-            $table->boolean('status'); //barang sudah selesai dikirim atau belum
             $table->timestamps();
         });
     }
