@@ -21,8 +21,20 @@ class StockController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate(
+            [
+                "nama_barang" => "required",
+                "jumlah" => "required",
+                "harga_modal" => "required"
+            ],
+            [
+                "nama_barang" => "Nama Barang Tidak Boleh Kosong",
+                "jumlah" => "Jumlah Barang tidak boleh kosong",
+                "harga_modal" => "Harga Modal Tidak Boleh Kosong"
+            ]
+        );
         Stock::create($request->all());
-        return redirect()->route('stocks');
+        return redirect()->route('stocks')->with("success", "Produk Baru Telah Dimasukkan");
     }
 
     public function add_view(): View

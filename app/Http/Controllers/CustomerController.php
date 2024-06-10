@@ -21,8 +21,19 @@ class CustomerController extends Controller
 
     public function add(Request $request)
     {
+        $request->validate(
+            [
+                "customer_name"=>"required",
+                "lokasi"=>"required",
+                "nomor_telepon"=>"required",
+            ],
+            [
+                "customer_name"=>"Nama Pelanggan Tidak Boleh Kosong",
+                "lokasi"=>"Lokasi Tidak Boleh Kosong",
+                "nomor_telepon"=>"Nomor Telepon Tidak Boleh Kosong",
+            ]);
         Customer::create($request->all());
-        return redirect()->route('customer');
+        return redirect()->route('customer')->with("success","Customer telah ditambahkan");
     }
 
     public function getData($id)
