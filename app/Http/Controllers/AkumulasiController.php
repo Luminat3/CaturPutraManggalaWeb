@@ -16,9 +16,23 @@ class AkumulasiController extends Controller
         return view('dashboard.akumulasi',['stock'=>$stock_barang, 'customer' => $customer]);
     }
 
-    public function add(Request $request)
+    public function create(Request $request)
     {
-        DetailTransaksi::create($request->all());
-        return redirect()->route('riwayat');
+        $request->validate([
+            'input.*.nama_barang' => 'required',
+            'input.*.jumlah' => 'required'
+        ],
+        [
+            'input.*.nama_barang' => 'Barang Tidak Boleh Kosong',
+            'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong'
+        ]
+        );
+
+        foreach($request->input as $key => $value)
+        {
+            DetailTransaksi::create($value);
+
+        }
+        return back()-> with('success', 'Pengeluaran sudah tercatat');
     }
 }

@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/customer/delete/{id}', [CustomerController::class, 'deleteData']);//delete customer
     Route::get('/dahsboard/history', [])->name('riwayat');//Menampilkan halaman riwayat
     Route::get('/dashboard/akumulasi', [AkumulasiController::class, 'show']); //menampilkan halaman akumulasi untuk per proyek
+    Route::post('/dashboard/akumulasi/create', [AkumulasiController::class, 'create']); //menampilkan halaman akumulasi untuk per proyek
 });
 
 require __DIR__.'/auth.php';

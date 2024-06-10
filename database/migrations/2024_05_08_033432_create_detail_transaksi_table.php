@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detail_transaksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_barang')->references('id')->on('barang');
             $table->foreignId('id_customer')->references('id')->on('customer');
+            $table->foreignId('id_barang')->references('id')->on('barang');
             $table->string('nama_barang')->references('nama_barang')->on('barang');
             $table->integer('jumlah');
             $table->timestamps();

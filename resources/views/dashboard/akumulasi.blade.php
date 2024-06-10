@@ -14,7 +14,7 @@
     <div class="card card-primary">
         <!-- /.card-header -->
         <!-- form start -->
-        <form action = "/" method="POST">
+        <form action = "/dashboard/akumulasi/create" method="POST">
             @csrf
             <div class="card-body">
                 <div class="form-group">
@@ -37,7 +37,7 @@
                     <tr>
                         <td>
                             <div class="form-group">
-                                <select class="custom-select rounded-0" id="namaBarang" name="nama_barang">
+                                <select class="custom-select rounded-0" id="namaBarang" name="nama_barang[0]">
                                     <option>--Pilih Barang--</option> 
                                     @foreach($stock as $st)
                                         <option>{{$st['nama_barang']}}</option> 
@@ -57,15 +57,6 @@
                         </td>
                     </tr>
                 </table>
-
-
-                <label>Tanggal Transaksi :</label>
-                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
 
 
                 {{-- <div class="form-check">
@@ -89,7 +80,7 @@
                 `<tr>
                         <td>
                             <div class="form-group">
-                                <select class="custom-select rounded-0" id="namaBarang" name="nama_barang">
+                                <select class="custom-select rounded-0" id="namaBarang" name="input[+i+][nama_barang]">
                                     <option>--Pilih Barang--</option> 
                                     @foreach($stock as $st)
                                         <option>{{$st['nama_barang']}}</option> 
@@ -100,7 +91,7 @@
 
                         <td>
                             <div class="form-group">
-                                <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Jumlah ">
+                                <input type="number" class="form-control" id="inputJumlah" name="input[+i+][jumlah]" placeholder="Jumlah ">
                             </div>
                         </td>
                         
