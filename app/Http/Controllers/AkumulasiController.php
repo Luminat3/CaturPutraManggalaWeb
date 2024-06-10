@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\Stock;
@@ -13,26 +14,28 @@ class AkumulasiController extends Controller
     {
         $stock_barang = Stock::all();
         $customer = Customer::all();
-        return view('dashboard.akumulasi',['stock'=>$stock_barang, 'customer' => $customer]);
+        return view('dashboard.akumulasi', ['stock' => $stock_barang, 'customer' => $customer]);
     }
 
     public function create(Request $request)
     {
-        $request->validate([
-            'input.*.nama_barang' => 'required',
-            'input.*.jumlah' => 'required'
-        ],
-        [
-            'input.*.nama_barang' => 'Barang Tidak Boleh Kosong',
-            'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong'
-        ]
+        $request->validate(
+            [
+                'input.*.id_barang' => 'required',
+                'input.*.jumlah' => 'required',
+                'id_customer' => 'required'
+            ],
+            [
+                'input.*.id_barang' => 'Barang Tidak Boleh Kosong',
+                'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
+                'id_customer' => 'ID Pelanggan Tidak Boleh Kosong'
+            ]
         );
-
-        foreach($request->input as $key => $value)
-        {
+        foreach ($request->input as $key => $value) {
+            $value['id_customer'] = $request->id_customer;
             DetailTransaksi::create($value);
-
+            Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
         }
-        return back()-> with('success', 'Pengeluaran sudah tercatat');
+        return back()->with('success', 'Pengeluaran sudah tercatat');
     }
 }

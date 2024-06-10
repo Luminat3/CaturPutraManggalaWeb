@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,7 +14,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_customer')->references('id')->on('customer');
             $table->foreignId('id_barang')->references('id')->on('barang');
-            $table->string('nama_barang')->references('nama_barang')->on('barang');
             $table->integer('jumlah');
             $table->timestamps();
         });
