@@ -16,7 +16,14 @@
             <div class="card-header">
                 <h3 class="card-title"></h3>
             </div>
-            <!-- /.card-header -->
+
+            {{-- Error Handling --}}
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    {!! implode('', $errors->all(':message')) !!}
+                </div>
+            @endif
+
             <!-- form start -->
             <form action="/dashboard/customer/create" method="POST" enctype="multipart/form-data">
                 @csrf
