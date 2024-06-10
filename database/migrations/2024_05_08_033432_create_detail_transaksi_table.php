@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('id_customer')->references('id')->on('customer');
             $table->foreignId('id_barang')->references('id')->on('barang');
             $table->integer('jumlah');
-            $table->boolean('status');
+            $table->boolean('transaksi_selesai')->default(false);
             $table->timestamps();
         });
     }
