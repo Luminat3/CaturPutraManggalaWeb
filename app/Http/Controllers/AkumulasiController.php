@@ -28,7 +28,7 @@ class AkumulasiController extends Controller
             [
                 'input.*.id_barang' => 'Barang Tidak Boleh Kosong',
                 'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
-                'id_customer' => 'ID Pelanggan Tidak Boleh Kosong'
+                'id_customer' => 'Nama Pelanggan Tidak Boleh Kosong'
             ]
         );
         foreach ($request->input as $key => $value) {

@@ -15,7 +15,11 @@
     Buat API POST untuk create data baru -->
 <div class="card card-primary">
     <!-- /.card-header -->
-    <div class="alert alert-primary" role="alert">This is a primary alert—check it out!</div>
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            {!! implode('', $errors->all(':message')) !!}
+        </div>
+    @endif
     <!-- form start -->
     <form action="/dashboard/akumulasi/create" method="POST">
         @csrf
