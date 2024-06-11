@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Customer;
+use App\Models\DetailTransaksi;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Transaksi;
@@ -11,7 +12,7 @@ class HistoryController extends Controller
 {
     public function show(): View
     {
-        $transaksi = Transaksi::all();
-        return view('dashboard.history', ['transaksi'=>$transaksi]);
+        $detail_transaksi = DetailTransaksi::all();
+        return view('dashboard.history', ['detail_transaksi'=>$detail_transaksi]);
     }
 }

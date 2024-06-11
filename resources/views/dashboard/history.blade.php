@@ -13,20 +13,25 @@
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>ID Pembelian</th>
                         <th>Nama Pembeli</th>
-                        <th>Lokasi</th>
-                        <th>Tanggal Pelunasan</th>
+                        <th>Id Barang</th>
+                        <th>Jumlah</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($transaksi as $transaksit)
+                    @foreach($detail_transaksi as $detail)
                         <tr>
-                            <td>{{$transaksi['id']}}</td>
-                            <td>{{$transaksi['company_name']}}</td>
-                            <td>{{$transaksi['lokasi']}}</td>
-                            <td>{{$transaksi['nomor_telepon']}}</td>
+                            <td>{{$detail['id_customer']}}</td>
+                            <td>{{$detail['id_barang']}}</td>
+                            <td>{{$detail['jumlah']}}</td>
+                            <td>
+                                @if($detail['transaksi_selesai'] == "0" )
+                                    Belum Selesai
+                                @else
+                                    Selesai
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
