@@ -33,6 +33,10 @@ class AkumulasiController extends Controller
         );
         foreach ($request->input as $key => $value) {
             $value['id_customer'] = $request->id_customer;
+            $nama_customer = Customer::query()->where('id', $value['id_customer'])->pluck('customer_name')->first();
+            $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
+            $value['nama_customer'] = $nama_customer;
+            $value['nama_barang'] = $nama_barang;
             DetailTransaksi::create($value);
             Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
         }

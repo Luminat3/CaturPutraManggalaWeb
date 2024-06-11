@@ -15,6 +15,7 @@
                     <tr>
                         <th>Nama Pembeli</th>
                         <th>Id Barang</th>
+                        <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Status</th>
                     </tr>
@@ -22,11 +23,12 @@
                 <tbody>
                     @foreach($detail_transaksi as $detail)
                         <tr>
-                            <td>{{$detail['id_customer']}}</td>
+                            <td>{{$detail['nama_customer']}}</td>
                             <td>{{$detail['id_barang']}}</td>
+                            <td>{{$detail['nama_barang']}}</td>
                             <td>{{$detail['jumlah']}}</td>
                             <td>
-                                @if($detail['transaksi_selesai'] == "0" )
+                                @if($detail['transaksi_selesai'] == false )
                                     Belum Selesai
                                 @else
                                     Selesai
