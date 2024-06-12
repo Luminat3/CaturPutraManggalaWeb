@@ -334,7 +334,7 @@ return [
             'url' => 'dashboard/akumulasi',
         ],  
         [
-            'text' => 'Buat Invoice',
+            'text' => 'Transaksi',
             'icon' => 'fas fa-fw fa-exchange-alt',
             'url' => 'dashboard/transaction',
         ],
@@ -343,6 +343,11 @@ return [
             'icon' => 'fas fa-fw fa-history',
             'url' => 'dashboard/history',
         ],
+        [
+            'text' => 'Customer',
+            'url' => 'dashboard/customer',
+            'icon' => 'fas fa-fw fa-building',
+        ],
 
         ['header' => 'Information'],
         [
@@ -350,11 +355,7 @@ return [
             'url' => 'profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'Customer',
-            'url' => 'dashboard/customer',
-            'icon' => 'fas fa-fw fa-building',
-        ],
+        
         // [
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',

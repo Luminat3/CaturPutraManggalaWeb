@@ -3,13 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <!-- <table border="3">
-        <tr>
-            
-        </tr>
-        
-    </table> -->
-
     <div class="card">
       <div class="card-header">
       <h1 class="card-title">Stok Barang</h1>

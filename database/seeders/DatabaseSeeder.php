@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         ]);
     
         DB::table('users')->insert(['id'=> '01', 'name'=>'admin', 'email'=>'admin@gmail.com', 'password'=>bcrypt('admin')]);
+
+        DB::table('customer')->insert(['id'=> '01', 'customer_name'=>'Adrian Chen', 'lokasi'=>'KM.7', 'nomor_telepon'=>"081274060857"]);
     }
 
     
