@@ -60,15 +60,15 @@
                 <form action="/dashboard/transaction/create" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Formulir Transaksi Baru</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <label for="namaCustomer">Nama Pelanggan :</label>
-                        <select class="custom-select rounded-0" id="namaCustomer" name="id_customer">
-                            <option value="">--Pilih Pelanggan--</option>
+                        <select class="custom-select rounded-0" id="namaCustomer" name="id_customer" required>
+                            <option selected disabled value="">-- Pilih Pelanggan --</option>
                             @foreach($customer as $cust)
                                 <option value="{{$cust['id']}}">{{$cust['customer_name']}}, {{$cust['lokasi']}}</option>
                             @endforeach

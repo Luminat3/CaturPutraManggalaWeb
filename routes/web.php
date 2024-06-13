@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/transaction', [TransactionController::class, 'show'])->name('transaction');//menampilkan halaman pembuatan transaksi
     Route::post('/dashboard/transaction/create',[TransactionController::class, 'create']);//create record baru
     Route::get('/dashboard/transaction/detail/{id}', [TransactionController::class, 'show_detail']);
+    Route::get('/dashboard/transaction/detail/{id}/add', [TransactionController::class, 'create_akumulasi']);
 
     Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer'); //routing ke lihat data pelanggan
     Route::get('/dashboard/customer/create', [CustomerController::class, 'create_view']); //routing ke halaman tambah data pelanggan

@@ -37,7 +37,31 @@ class TransactionController extends Controller
     public function show_detail(): View
     {
         $transaction = Transaksi::latest()->first();
+        $stock = Stock::all();
         $data = DetailTransaksi::query()->where('id_transaksi', $transaction['id']);
-        return view('dashboard.transaction.detail', compact('data'));
+        return view('dashboard.transaction.detail', ["data" => $data, "stock" => $stock, "transaksi"=>$transaction]);
+    }
+
+
+    public function create_akumulasi(Request $request)
+    {
+        $request->validate(
+            [
+                'input.*.id_barang' => 'required',
+                'input.*.jumlah' => 'required',
+            ],
+            [
+                'input.*.id_barang' => 'Barang Tidak Boleh Kosong',
+                'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
+            ]
+        );
+        foreach ($request->input as $key => $value) {
+            $value['id_customer'] = $request->id_customer;
+            $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
+            $value['nama_barang'] = $nama_barang;
+            DetailTransaksi::create($value);
+            Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
+        }
+        return back()->with('success', 'Pengeluaran sudah tercatat');
     }
 }
