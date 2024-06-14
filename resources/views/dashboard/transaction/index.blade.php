@@ -16,7 +16,7 @@
 
         <!-- .card-body -->
         <div class="card-body">
-            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Buat Transaksi Baru</button>
+            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#modalTransaksiBaru">Buat Transaksi Baru</button>
 
             <table id="tableTransaksi" class="table table-bordered table-hover">
                 <thead>
@@ -54,13 +54,13 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modalTransaksiBaru" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form action="/dashboard/transaction/create" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Formulir Transaksi Baru</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Form Transaksi Baru</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -95,6 +95,7 @@
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
-<!-- @section('js')
+{{-- 
+@section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop -->
+@stop  --}}

@@ -31,19 +31,19 @@ class TransactionController extends Controller
         $nama_customer = Customer::query()->where('id', $request['id_customer'])->pluck('customer_name')->first();
         $request['nama_customer'] = $nama_customer;
         Transaksi::create($request->all());
-        return redirect()->route('transaction')->with("success", "Produk Baru Telah Dimasukkan");
+        return redirect()->route('transaction')->with("success", "Transaksi baru telah dibuat");
     }
 
     public function show_detail(): View
     {
         $transaction = Transaksi::latest()->first();
         $stock = Stock::all();
-        $data = DetailTransaksi::query()->where('id_transaksi', $transaction['id']);
+        $data = DetailTransaksi::query()->where('id_transaksi', $transaction['id'])->get();
         return view('dashboard.transaction.detail', ["data" => $data, "stock" => $stock, "transaksi"=>$transaction]);
     }
 
 
-    public function create_akumulasi(Request $request)
+    public function create_akumulasi(Request $request, $id)
     {
         $request->validate(
             [
@@ -56,12 +56,14 @@ class TransactionController extends Controller
             ]
         );
         foreach ($request->input as $key => $value) {
-            $value['id_customer'] = $request->id_customer;
             $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
+            $harga_modal = Stock::query()->where('id', $value['id_barang'])->pluck('harga_modal')->first();
+            $value['id_transaksi'] = $id;
             $value['nama_barang'] = $nama_barang;
+            $value['harga_modal'] = $harga_modal;
             DetailTransaksi::create($value);
             Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
         }
-        return back()->with('success', 'Pengeluaran sudah tercatat');
+        return redirect()->route('detail_transaksi', $id)->with("success", "Produk Baru Telah Dimasukkan");
     }
 }

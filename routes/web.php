@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/stock', [StockController::class, 'show'])->name('stocks');//get data stock
     Route::get('/dashboard/stock/create', [StockController::class, 'create_view']);//menampilkan view menambahkan jenis barang
     Route::post('/dashboard/stock/create', [StockController::class, 'create']);//create barang baru
-    Route::get('/dashboard/stock/add', [StockController::class, 'add_view']);//menunjukan halaman menambahkan stock barang
+    // Route::get('/dashboard/stock/add', [StockController::class, 'add_view']);//menunjukan halaman menambahkan stock barang
     Route::post('/dashboard/stock/add', [StockController::class, 'add']);//menambahkan jumlah stock
 
 
@@ -46,8 +46,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard/transaction', [TransactionController::class, 'show'])->name('transaction');//menampilkan halaman pembuatan transaksi
     Route::post('/dashboard/transaction/create',[TransactionController::class, 'create']);//create record baru
-    Route::get('/dashboard/transaction/detail/{id}', [TransactionController::class, 'show_detail']);
-    Route::get('/dashboard/transaction/detail/{id}/add', [TransactionController::class, 'create_akumulasi']);
+    Route::get('/dashboard/transaction/detail/{id}', [TransactionController::class, 'show_detail'])->name('detail_transaksi');
+    Route::post('/dashboard/transaction/detail/{id}/add', [TransactionController::class, 'create_akumulasi']);
 
     Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer'); //routing ke lihat data pelanggan
     Route::get('/dashboard/customer/create', [CustomerController::class, 'create_view']); //routing ke halaman tambah data pelanggan

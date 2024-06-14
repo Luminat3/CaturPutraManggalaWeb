@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Stock;
+use App\Models\HistoryBarang;
 
 class StockController extends Controller
 {
@@ -43,10 +44,34 @@ class StockController extends Controller
         return view('dashboard.stock.add', ['stock'=>$stock_barang]);
     }
 
-    public function add(Request $request, $id)
-    {
-        $data = Stock::find($id);
-        $data -> update($request->all());
-        return redirect()->route('stocks');
+    public function add(Request $request){
+        $request->validate(
+            [
+                'input.*.id_barang' => 'required',
+                'input.*.jumlah' => 'required',
+                'image_bukti' => 'required',
+            ],
+            [
+                'input.*.id_barang' => 'Barang Tidak Boleh Kosong',
+                'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
+                'image_bukti' => 'Masukkan Bukti Penambahan Barang',
+            ]
+        );
+        foreach ($request->input as $key => $value) {
+            $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
+            $value['nama_barang'] = $nama_barang;
+            Stock::where('id', $value['id_barang'])->increment("jumlah", $value['jumlah']);
+
+            $historyData = [
+                'id_barang' => $value['id_barang'],
+                'nama_barang' => $nama_barang,
+                'jumlah' => $value['jumlah'],
+                'image_bukti' => $request->file('image_bukti')->store('bukti', 'public'), // assuming you want to store the image and save the path
+            ];
+            
+            HistoryBarang::create($historyData);
+        }
+
+        return redirect()->route('stocks')->with("success", "Stock Produk telah ditambahkan");
     }
 }

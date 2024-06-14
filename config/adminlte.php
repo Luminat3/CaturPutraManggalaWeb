@@ -328,11 +328,11 @@ return [
             'icon' => 'fas fa-fw fa-boxes',
             'url' => 'dashboard/stock',
         ],
-        [
-            'text' => 'Pengeluaran Akumulasi',
-            'icon' => 'fas fa-fw fa-cart-plus',
-            'url' => 'dashboard/akumulasi',
-        ],  
+        // [
+        //     'text' => 'Pengeluaran Akumulasi',
+        //     'icon' => 'fas fa-fw fa-cart-plus',
+        //     'url' => 'dashboard/akumulasi',
+        // ],  
         [
             'text' => 'Transaksi',
             'icon' => 'fas fa-fw fa-exchange-alt',

@@ -7,17 +7,21 @@
 @stop
 
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
     <div class="card">
                 <!-- /.card-header -->
         <div class="card-body">
             
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Tambah Pengeluaran Akumulasi</button>
+            <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalConfirm">Selesaikan Transaksi</button>
 
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
+                        <th>Harga Modal</th>
                         <th>Tanggal Keluar</th>
                     </tr>
                 </thead>
@@ -26,6 +30,7 @@
                         <tr>
                             <td>{{$data['nama_barang']}}</td>
                             <td>{{$data['jumlah']}}</td>
+                            <td>{{$data['harga_modal']}}</td>
                             <td>{{$data['created_at']}}</td>
                         </tr>
                     @endforeach
@@ -47,7 +52,7 @@
                         </button>
                     </div>
                     
-                <form action="/dashboard/transaction/detail/{{$transaksi -> id}}/create_akumulasi" method="POST" enctype="multipart/form-data">
+                <form action="/dashboard/transaction/detail/{{$transaksi -> id}}/add" method="POST" enctype="multipart/form-data">
                     @csrf    
                     <div class="modal-body">
                         <a class="btn btn-success my-2" id="tambah_barang">Tambah Item</a>
@@ -85,6 +90,30 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>    
+                    <div class="modal-body">
+                    <h4>Apakah anda ingin menyelesaikan transaksi ?</h4>
+                    <h4>Pastikan semua barang yang diinput sudah sesuai.</h4>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Lanjutkan</button>
+                    </div>
+            </div>
+        </div>
+    </div>    
+</div>
 
 
     <script>
@@ -128,6 +157,6 @@
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
-<!-- @section('js')
+ {{-- @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop -->
+@stop --}}

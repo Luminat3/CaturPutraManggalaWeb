@@ -16,7 +16,7 @@
         <form action = "/dashboard/stock/add" method="POST">
             @csrf
             <div class="card-body">
-                <label for="">Item :</label>
+                <label for="">Item  <a class="text-danger">*</a> : </label>
                 <a class="btn btn-success my-2" id="tambah_barang">Tambah Item</a>
                 <table id="tabel_barang" class="table border-0">
                     <tr>
@@ -25,7 +25,7 @@
                                 <select class="custom-select rounded-0" id="namaBarang" name="nama_barang">
                                     <option>--Pilih Barang--</option> 
                                     @foreach($stock as $st)
-                                        <option>{{$st['nama_barang']}}</option> 
+                                        <option value="{{$st['id']}}">{{$st['nama_barang']}}</option> 
                                     @endforeach
                                 </select>   
                             </div>
@@ -43,23 +43,27 @@
                     </tr>
                 </table>
 
+
                 <div class="form-group">
-                    <label for="exampleInputFile">Bukti Pembelian :</label>
+                    <label for="exampleInputFile">Bukti Terima Barang :  <a class="text-danger">*</a></label>
+                    <div class="mb-3">
+                        <input type="file" class="form-control-input" id="formFileMultiple" name="image">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputFile">Keterangan</label> 
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="exampleInputFile" name = "nota">
-                            <label class="custom-file-label" for="exampleInputFile">Pilih File Invoice / Nota</label>
-                        </div>
-                        <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
+                            <input type="text" class="form-control" id="inputKeterangan" name="keterangan" placeholder="Keterangan">
                         </div>
                     </div>
                 </div>
 
-                <div class="form-check">
+                {{-- <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
+                </div> --}}
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
