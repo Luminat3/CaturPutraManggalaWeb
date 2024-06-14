@@ -15,7 +15,7 @@
       <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalTambahStock">Tambah Stock</button>
       <a class="btn btn-primary my-2" href="/dashboard/stock/create">Tambah Item</a>
       <a class="btn btn-warning my-2" href="/dashboard/stock/produksi">Produksi Barang</a>
-      <a class="btn btn-secondary my-2" href="/dashboard/stock/produksi">History</a>
+      <a class="btn btn-secondary my-2" href="/dashboard/stock/history">History</a>
       <table id="stockTable" class="table table-bordered table-hover">
         <thead>
           <tr>
@@ -91,11 +91,9 @@
 
           <div class="form-group">
             <label for="exampleInputFile">Keterangan</label> 
-            <div class="input-group">
                 <div class="custom-file">
                     <input type="text" class="form-control" id="inputKeterangan" name="keterangan" placeholder="Keterangan">
                 </div>
-            </div>
           </div>
         </div>
 

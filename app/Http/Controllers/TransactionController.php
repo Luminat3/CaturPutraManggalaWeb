@@ -20,6 +20,12 @@ class TransactionController extends Controller
         return view('dashboard.transaction.index', ['transaction' => $transaction, 'customer'=>$customer]);
     }
 
+    public function show_history(): View
+    {
+        $transaction = Transaksi::where('status', 1)->get();
+        return view('dashboard.history', ['transaction' => $transaction]);
+    }
+
     public function create(Request $request) {
         $request->validate(
             [
@@ -67,3 +73,5 @@ class TransactionController extends Controller
         return redirect()->route('detail_transaksi', $id)->with("success", "Produk Baru Telah Dimasukkan");
     }
 }
+
+//DB::table("Machines")->select(DB::raw('(SUM(cantidad)*SUM(cantidad_actual)) as total'))->get() untuk dapetin total harga modal

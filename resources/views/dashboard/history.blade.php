@@ -3,43 +3,45 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Riwayat</h1>
+    <h1>Riwayat Transaksi</h1>
 @stop
 
 @section('content')
-    <div class="card">
-                <!-- /.card-header -->
+    <div class="card card-primary">
+        <!-- .card-body -->
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="tableTransaksi" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Nama Pembeli</th>
-                        <th>Id Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Jumlah</th>
-                        <th>Status</th>
+                        <th class="col-2">ID Pelanggan</th>
+                        <th class="col-2">Nama Pelanggan</th>
+                        <th class="col-3">Tanggal Transaksi</th>
+                        <th class="col-4">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($detail_transaksi as $detail)
-                        <tr>
-                            <td>{{$detail['nama_customer']}}</td>
-                            <td>{{$detail['id_barang']}}</td>
-                            <td>{{$detail['nama_barang']}}</td>
-                            <td>{{$detail['jumlah']}}</td>
-                            <td>
-                                @if($detail['transaksi_selesai'] == false )
-                                    Belum Selesai
-                                @else
-                                    Selesai
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach($transaction as $transaksi)
+                <tr onclick="window.location='/dashboard/transaction/detail/{{$transaksi->id}}'" role="button">
+                    <td>{{$transaksi['id_customer']}}</td>
+                    <td>{{$transaksi['nama_customer']}}</td>
+                    <td>{{$transaksi['created_at']}}</td>
+                    <td>
+                        @if($transaksi['status'] == false )
+                            Belum Selesai
+                        @else
+                            Selesai
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
-                <!-- /.card-body -->
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+
+        </div>
     </div>
 @stop
 

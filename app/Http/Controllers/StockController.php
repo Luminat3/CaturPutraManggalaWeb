@@ -38,10 +38,10 @@ class StockController extends Controller
         return redirect()->route('stocks')->with("success", "Produk Baru Telah Dimasukkan");
     }
 
-    public function add_view(): View
+    public function show_history(): View
     {
-        $stock_barang = Stock::all();
-        return view('dashboard.stock.add', ['stock'=>$stock_barang]);
+        $historyData = HistoryBarang::all();
+        return view('dashboard.stock.history', ['data'=>$historyData]);
     }
 
     public function add(Request $request){
@@ -67,6 +67,7 @@ class StockController extends Controller
                 'nama_barang' => $nama_barang,
                 'jumlah' => $value['jumlah'],
                 'image_bukti' => $request->file('image_bukti')->store('bukti', 'public'), // assuming you want to store the image and save the path
+                'keterangan' => $request['keterangan']
             ];
             
             HistoryBarang::create($historyData);

@@ -37,11 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/stock', [StockController::class, 'show'])->name('stocks');//get data stock
     Route::get('/dashboard/stock/create', [StockController::class, 'create_view']);//menampilkan view menambahkan jenis barang
     Route::post('/dashboard/stock/create', [StockController::class, 'create']);//create barang baru
-    // Route::get('/dashboard/stock/add', [StockController::class, 'add_view']);//menunjukan halaman menambahkan stock barang
+    Route::get('/dashboard/stock/history', [StockController::class, 'show_history']);//menunjukan halaman history stock barang
     Route::post('/dashboard/stock/add', [StockController::class, 'add']);//menambahkan jumlah stock
 
 
-    Route::get('/dashboard/history', [HistoryController::class, 'show']);//menampilkan riwayat transakasi
+    Route::get('/dashboard/history', [TransactionController::class, 'show_history']);//menampilkan riwayat transakasi
 
 
     Route::get('/dashboard/transaction', [TransactionController::class, 'show'])->name('transaction');//menampilkan halaman pembuatan transaksi
