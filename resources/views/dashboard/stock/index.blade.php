@@ -2,13 +2,27 @@
 
 @section('title', 'Dashboard')
 
+@section('content_header')
+    <h1>Stock</h1>
+@stop
+
+
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 
+  @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
   <div class="card">
-      <div class="card-header">
-      <h1 class="card-title">Stok Barang</h1>
-    </div>
     <!-- /.card-header -->
     <div class="card-body">
       
@@ -31,7 +45,7 @@
                 <td>{{$st['id']}}</td>
                 <td>{{$st['nama_barang']}}</td>
                 <td>{{$st['jumlah']}}</td>
-                <td>{{$st['harga_modal']}}</td>
+                <td>{{$st->formatRupiah('harga_modal')}}</td>
             </tr>
           @endforeach
         </tbody>

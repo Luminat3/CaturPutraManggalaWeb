@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->unsignedBigInteger('jumlah')->nullable();
             $table->integer('harga_modal');
+            $table->boolean('is_unlimited')->default(false);
             $table->timestamps();
         });
     }

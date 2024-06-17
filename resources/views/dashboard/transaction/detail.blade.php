@@ -9,19 +9,36 @@
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="card">
                 <!-- /.card-header -->
         <div class="card-body">
+            @if ($transaksi['status'] == false)
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Tambah Pengeluaran Akumulasi</button>
+                <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalConfirm">Selesaikan Transaksi</button>
             
-            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Tambah Pengeluaran Akumulasi</button>
-            <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalConfirm">Selesaikan Transaksi</button>
+            @else
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Cetak Invoice</button>
+            @endif
+            
 
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
-                        <th>Harga Modal</th>
+                        <th>Harga Modal / pcs</th>
                         <th>Tanggal Keluar</th>
                     </tr>
                 </thead>
@@ -30,11 +47,17 @@
                         <tr>
                             <td>{{$data['nama_barang']}}</td>
                             <td>{{$data['jumlah']}}</td>
-                            <td>{{$data['harga_modal']}}</td>
+                            <td>{{$data ->formatRupiah('harga_modal')}}</td>
                             <td>{{$data['created_at']}}</td>
                         </tr>
                     @endforeach
                 </tbody>
+            </table>
+            <table class ="table table-bordered">
+                <tr>
+                    <td><h5>Total Modal</h5></td>
+                    <td>Rp{{$modal['modal']}}</td>
+                </tr>
             </table>
         </div>
                 <!-- /.card-body -->
@@ -42,8 +65,8 @@
 
 
 
-    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade bd-example-modal-lg" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Formulir Tambah Barang</h5>
@@ -63,7 +86,13 @@
                                         <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]">
                                             <option value="">--Pilih Barang--</option>
                                             @foreach($stock as $st)
-                                                <option value="{{$st['id']}}">{{$st['nama_barang']}}</option>
+                                                <option value="{{$st['id']}}">{{$st['nama_barang']}} - Tersedia : 
+                                                    @if ($st->unlimited_supply)
+                                                        Unlimited Supply
+                                                    @else
+                                                        Tersedia: {{ $st->jumlah }}
+                                                    @endif
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -108,7 +137,10 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Lanjutkan</button>
+                        <form action="/dashboard/transaction/detail/{{$transaksi -> id}}/selesai" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Ya, Selesaikan</button>
+                        <form>
                     </div>
             </div>
         </div>
@@ -127,7 +159,13 @@
                             <select class="custom-select rounded-0" id="namaBarang" name="input[${i}][id_barang]">
                                 <option>--Pilih Barang--</option> 
                                 @foreach($stock as $st)
-                                    <option value="{{$st['id']}}">{{$st['nama_barang']}}</option>
+                                    <option value="{{$st['id']}}">{{$st['nama_barang']}} - Tersedia : 
+                                        @if ($st->unlimited_supply)
+                                            Unlimited Supply
+                                        @else
+                                            Tersedia: {{ $st->jumlah }}
+                                        @endif
+                                    </option>
                                 @endforeach
                             </select>   
                         </div>

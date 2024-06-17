@@ -13,6 +13,6 @@ class HistoryController extends Controller
     public function show(): View
     {
         $detail_transaksi = DetailTransaksi::all();
-        return view('dashboard.history', ['detail_transaksi'=>$detail_transaksi]);
+        return view('dashboard.history.index', ['detail_transaksi'=>$detail_transaksi]);
     }
 }

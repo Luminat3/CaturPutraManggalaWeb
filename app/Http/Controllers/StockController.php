@@ -34,7 +34,11 @@ class StockController extends Controller
                 "harga_modal" => "Harga Modal Tidak Boleh Kosong"
             ]
         );
-        Stock::create($request->all());
+
+        $data = $request->all();
+        $data['is_unlimited'] = $request->has('is_unlimited') ? 1 : 0;
+
+        Stock::create($data);
         return redirect()->route('stocks')->with("success", "Produk Baru Telah Dimasukkan");
     }
 
@@ -60,7 +64,7 @@ class StockController extends Controller
         foreach ($request->input as $key => $value) {
             $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
             $value['nama_barang'] = $nama_barang;
-            Stock::where('id', $value['id_barang'])->increment("jumlah", $value['jumlah']);
+            Stock::where('id', $value['id_barang'])->increment("jumlah", $value['jumlah']); 
 
             $historyData = [
                 'id_barang' => $value['id_barang'],
@@ -73,6 +77,6 @@ class StockController extends Controller
             HistoryBarang::create($historyData);
         }
 
-        return redirect()->route('stocks')->with("success", "Stock Produk telah ditambahkan");
+        return redirect()->route('stocks')->with("success", "Stock telah ditambahkan");
     }
 }

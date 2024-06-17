@@ -27,7 +27,13 @@
                             <td>{{$data['nama_barang']}}</td>
                             <td>{{$data['jumlah']}}</td>
                             <td>{{$data['keterangan']}}</td>
-                            <td> <a href = "storage/{{$data['image_bukti']}}">Lihat Bukti</a></td>
+                            <td>
+                                @if ($data['image_bukti'] == null)
+                                
+                                @else
+                                    <a href = "storage/app/public/bukti/{{$data['image_bukti']}}">Lihat Bukti</a>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

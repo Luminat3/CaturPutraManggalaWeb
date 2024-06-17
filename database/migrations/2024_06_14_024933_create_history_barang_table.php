@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_barang')->references('id')->on('barang');
             $table->string('nama_barang');
             $table->unsignedBigInteger('jumlah');
-            $table->string('image_bukti');
+            $table->string('image_bukti')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });

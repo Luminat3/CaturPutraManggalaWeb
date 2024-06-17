@@ -23,7 +23,7 @@
                 @foreach($transaction as $transaksi)
                 <tr onclick="window.location='/dashboard/transaction/detail/{{$transaksi->id}}'" role="button">
                     <td>{{$transaksi['id_customer']}}</td>
-                    <td>{{$transaksi['nama_customer']}}</td>
+                    <td>{{$transaksi['nama_customer']}}</td>    
                     <td>{{$transaksi['created_at']}}</td>
                     <td>
                         @if($transaksi['status'] == false )
