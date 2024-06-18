@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Stock;
 use App\Models\HistoryBarang;
+use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
@@ -59,6 +60,8 @@ class StockController extends Controller
                 'input.*.id_barang' => 'Barang Tidak Boleh Kosong',
                 'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
                 'image_bukti' => 'Masukkan Bukti Penambahan Barang',
+                'input.*.jumlah.integer' => 'Jumlah harus berupa angka',
+                'input.*.jumlah.min' => 'Jumlah minimal adalah 1',
             ]
         );
         foreach ($request->input as $key => $value) {
@@ -78,5 +81,61 @@ class StockController extends Controller
         }
 
         return redirect()->route('stocks')->with("success", "Stock telah ditambahkan");
+    }
+
+
+    public function decrease(Request $request){
+        $request->validate(
+            [
+                'inputPengurangan.*.id_barang' => 'required',
+                'inputPengurangan.*.jumlah' => 'required',
+            ],
+            [
+                'inputPengurangan.*.id_barang' => 'Barang Tidak Boleh Kosong',
+                'inputPengurangan.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
+                'inputPengurangan.*.jumlah.integer' => 'Jumlah harus berupa angka',
+                'inputPengurangan.*.jumlah.min' => 'Jumlah minimal adalah 1',
+            ]
+        );
+
+        DB::beginTransaction();
+
+    try {
+
+        foreach ($request->inputPengurangan as $key => $value) {
+            $stock = Stock::find($value['id_barang']);
+            
+            if (!$stock) {
+                return redirect()->route('stocks')->with("error", "Barang dengan ID {$value['id_barang']} tidak ditemukan.");
+            }
+    
+            if (!$stock->is_unlimited && $stock->jumlah < $value['jumlah']) {
+                return redirect()->route('stocks')->with("error", "Jumlah stok barang {$stock->nama_barang} tidak mencukupi.");
+            }
+
+            $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
+            $value['nama_barang'] = $nama_barang;
+
+            $historyData = [
+                'id_barang' => $value['id_barang'],
+                'nama_barang' => $nama_barang,
+                'jumlah' => $value['jumlah'],
+                'keterangan' => $request['keterangan']
+            ];
+            
+            HistoryBarang::create($historyData);
+            if ($stock['is_unlimited'] == false) {
+                Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
+            }
+        }
+        DB::commit();
+        return redirect()->route('stocks')->with("success", "Stock telah dikurang");
+    }
+    catch (\Exception $e) {
+        DB::rollBack();
+
+        return redirect()->route('stocks')->with("error", $e->getMessage());
+    }
+    
     }
 }

@@ -12,57 +12,63 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>150</h3>
+          <h3>{{ $total_customer['total']}}</h3>  
 
-          <p>New Orders</p>
+          <p>Jumlah Customer</p>
         </div>
         <div class="icon">
-          <i class="ion ion-bag"></i>
+          <i class="fas fa-user-tag"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="dashboard/customer" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
+
+    
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
+          <h3>{{ $transaksi_berlangsung }}</h3>
 
-          <p>Bounce Rate</p>
+          <p>Transaksi Berlangsung</p>
         </div>
         <div class="icon">
-          <i class="ion ion-stats-bars"></i>
+          <i class="fas fa-cart-plus"></i>
         </div>
         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
+
+
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>44</h3>
+          <h3>{{ $jumlah_pengguna }}</h3>
 
-          <p>User Registrations</p>
+          <p>Transaksi Berlangsung</p>
         </div>
         <div class="icon">
-          <i class="ion ion-person-add"></i>
+          <i class="fas fa-user"></i>
         </div>
         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
+
+
     <div class="col-lg-3 col-6">
       <!-- small box -->
-      <div class="small-box bg-danger">
+      <div class="small-box bg-primary-emphasis">
         <div class="inner">
-          <h3>65</h3>
+          <h3>{{ $transaksi_selesai }}</h3>
 
-          <p>Unique Visitors</p>
+          <p>Transaksi Selesai</p>
         </div>
         <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+          <i class="fas fa-check-square"></i>
         </div>
         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>

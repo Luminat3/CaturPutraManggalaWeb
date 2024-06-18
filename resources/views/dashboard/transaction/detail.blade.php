@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Riwayat</h1>
+    <h1>Detail Transaksi</h1>
 @stop
 
 @section('content')
@@ -86,7 +86,7 @@
                                         <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]">
                                             <option value="">--Pilih Barang--</option>
                                             @foreach($stock as $st)
-                                                <option value="{{$st['id']}}">{{$st['nama_barang']}} - Tersedia : 
+                                                <option value="{{$st['id']}}"> {{$st['nama_barang']}} - Tersedia : 
                                                     @if ($st->unlimited_supply)
                                                         Unlimited Supply
                                                     @else

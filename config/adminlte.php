@@ -317,14 +317,14 @@ return [
         ],
         // [
         //     'text' => 'pages',
-        //     'url' => 'admin/pages',
+        //     'url' => 'admin/pages',  
         //     'icon' => 'far fa-fw fa-file',
         //     'label' => 4,
         //     'label_color' => 'success',
         // ],
-        ['header' => 'Stocks, Transactions, & History'],
+        ['header' => 'Utilities'],
         [
-            'text' => 'Stocks',
+            'text' => 'Inventory',
             'icon' => 'fas fa-fw fa-boxes',
             'url' => 'dashboard/stock',
         ],
@@ -335,7 +335,7 @@ return [
         // ],  
         [
             'text' => 'Transaksi',
-            'icon' => 'fas fa-fw fa-exchange-alt',
+            'icon' => 'fas fa-cart-plus',
             'url' => 'dashboard/transaction',
         ],
         [
@@ -346,7 +346,7 @@ return [
         [
             'text' => 'Customer',
             'url' => 'dashboard/customer',
-            'icon' => 'fas fa-fw fa-building',
+            'icon' => 'fas fa-user-tag',
         ],
 
         ['header' => 'Information'],
@@ -354,6 +354,11 @@ return [
             'text' => 'profile',
             'url' => 'profile',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'User',
+            'url' => '/dashboard/user',
+            'icon' => 'fas fa-user-plus',
         ],
         
         // [

@@ -71,39 +71,49 @@ class TransactionController extends Controller
                 'input.*.jumlah.min' => 'Jumlah minimal adalah 1',
             ]
         );
-        foreach ($request->input as $key => $value) {
-            $stock = Stock::find($value['id_barang']);
-            
-            if (!$stock) {
-                return redirect()->route('detail_transaksi', $id)->with("error", "Barang dengan ID {$value['id_barang']} tidak ditemukan.");
-            }
-    
-            if (!$stock->is_unlimited && $stock->jumlah < $value['jumlah']) {
-                return redirect()->route('detail_transaksi', $id)->with("error", "Jumlah stok barang {$stock->nama_barang} tidak mencukupi.");
-            }
 
-            $nama_barang = $stock->nama_barang;
-            $harga_modal = $stock->harga_modal;
-            // $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
-            // $harga_modal = Stock::query()->where('id', $value['id_barang'])->pluck('harga_modal')->first();
-            $value['id_transaksi'] = $id;
-            $value['nama_barang'] = $nama_barang;
-            $value['harga_modal'] = $harga_modal;
+        DB::beginTransaction();
 
-            $historyData = [
-                'id_barang' => $value['id_barang'],
-                'nama_barang' => $nama_barang,
-                'jumlah' => $value['jumlah'],
-                'keterangan' => "Pengeluaran barang untuk transaksi dengan ID $id"
-            ];
-            HistoryBarang::create($historyData);
-            DetailTransaksi::create($value);
-            if ($stock['is_unlimited'] == false) {
-                Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
+        try{
+            foreach ($request->input as $key => $value) {
+                $stock = Stock::find($value['id_barang']);
+                
+                if (!$stock) {
+                    return redirect()->route('detail_transaksi', $id)->with("error", "Barang dengan ID {$value['id_barang']} tidak ditemukan.");
+                }
+        
+                if (!$stock->is_unlimited && $stock->jumlah < $value['jumlah']) {
+                    return redirect()->route('detail_transaksi', $id)->with("error", "Jumlah stok barang {$stock->nama_barang} tidak mencukupi.");
+                }
+
+                $nama_barang = $stock->nama_barang;
+                $harga_modal = $stock->harga_modal;
+                // $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
+                // $harga_modal = Stock::query()->where('id', $value['id_barang'])->pluck('harga_modal')->first();
+                $value['id_transaksi'] = $id;
+                $value['nama_barang'] = $nama_barang;
+                $value['harga_modal'] = $harga_modal;
+
+                $historyData = [
+                    'id_barang' => $value['id_barang'],
+                    'nama_barang' => $nama_barang,
+                    'jumlah' => $value['jumlah'],
+                    'keterangan' => "Pengeluaran barang untuk transaksi dengan ID $id"
+                ];
+                HistoryBarang::create($historyData);
+                DetailTransaksi::create($value);
+                if ($stock['is_unlimited'] == false) {
+                    Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
+                }
             }
-            
+            DB::commit();
+            return redirect()->route('detail_transaksi', $id)->with("success", "Produk Baru Telah Dimasukkan");
         }
-        return redirect()->route('detail_transaksi', $id)->with("success", "Produk Baru Telah Dimasukkan");
+        catch (\Exception $e) {
+            DB::rollBack();
+    
+            return redirect()->route('detail_transaksi', $id)->with("error", $e->getMessage());
+        }
     }
 
 

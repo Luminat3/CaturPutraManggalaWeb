@@ -3,6 +3,7 @@
 use App\Http\Controllers\AkumulasiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CustomerController;
@@ -19,13 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard/index');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard/index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -39,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/stock/create', [StockController::class, 'create']);//create barang baru
     Route::get('/dashboard/stock/history', [StockController::class, 'show_history']);//menunjukan halaman history stock barang
     Route::post('/dashboard/stock/add', [StockController::class, 'add']);//menambahkan jumlah stock
+    Route::post('/dashboard/stock/decrease', [StockController::class, 'decrease']);
 
 
     Route::get('/dashboard/history', [TransactionController::class, 'show_history']);//menampilkan riwayat transakasi
@@ -63,6 +61,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard/akumulasi', [AkumulasiController::class, 'show']); //menampilkan halaman akumulasi untuk per proyek
     Route::post('/dashboard/akumulasi/create', [AkumulasiController::class, 'create']); //menampilkan halaman akumulasi untuk per proyek
+
+    Route::get('/dashboard/user/', [ProfileController::class, 'show'])->name('user');
+    Route::post('/dashboard/user/create', [ProfileController::class, 'create']);
+    Route::patch('/dashboard/user/{id}/update', [ProfileController::class, 'update_user']);
+    Route::delete('/dashboard/user/{id}/delete', [ProfileController::class, 'destroy_user']);
 });
 
 require __DIR__.'/auth.php';
