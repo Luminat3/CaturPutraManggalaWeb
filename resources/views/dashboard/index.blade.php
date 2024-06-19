@@ -77,7 +77,7 @@
   </div>
 
 <div class="row">
-  <div class="col card flex">
+  <div class="col-auto card">
     <div class="card-body">
       <h3>Transaksi Terkini</h3>
       <table id="example2" class="table table-bordered table-hover">

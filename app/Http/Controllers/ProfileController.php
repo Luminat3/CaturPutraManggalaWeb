@@ -44,6 +44,8 @@ class ProfileController extends Controller
         if ($user && $user->isDirty('email')) {
             $user->email_verified_at = null;
         }
+        
+        $user['is_admin'] = $request->has('is_admin') ? 1 : 0;
 
         // if ($validatedData->user()->isDirty('email')) {
         //     $validatedData->user()->email_verified_at = null;

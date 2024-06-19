@@ -23,6 +23,7 @@
             <th class="col-2">ID User</th>
             <th class="col-2">Nama</th>
             <th class="col-3">Email</th>
+            <th class="col-2">Role</th> 
             <th class="col-4">Edit/Delete</th>
             </tr>
             </thead>
@@ -32,6 +33,12 @@
                 <td>{{$user['id']}}</td>
                 <td>{{$user['name']}}</td>
                 <td>{{$user['email']}}</td>
+                <td>@if($user['is_admin'] == true)
+                        Admin
+                    @else
+                        User
+                    @endif
+                </td>
                 <td>
                     <a href="/dashboard/user/update/{{$user->id}}" class="btn btn-warning">Edit</a>
                     <a href="/dashboard/user/delete/{{$user->id}}" class="btn btn-danger">Delete</a>
@@ -75,9 +82,11 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password User">
                 </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="is_admin" name = "is_admin" value = true>
+                    <label class="form-check-label" for="exampleCheck1">Centang untuk Mendaftarkan Sebagai Admin</label>
+                </div>
             </div>
-
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>

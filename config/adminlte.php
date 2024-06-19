@@ -359,6 +359,7 @@ return [
             'text' => 'User',
             'url' => '/dashboard/user',
             'icon' => 'fas fa-user-plus',
+            'onlyAdmin' => 'true'
         ],
         
         // [
@@ -422,6 +423,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        App\Filter\OnlyAdminFIlter::class
     ],
 
     /*

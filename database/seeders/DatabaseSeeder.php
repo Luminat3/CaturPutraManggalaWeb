@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             ['id' => '012', 'nama_barang'=> 'U-Ditch kecil', 'jumlah' => rand(0,100), 'harga_modal' => 800000],
         ]);
     
-        DB::table('users')->insert(['id'=> '01', 'name'=>'admin', 'email'=>'admin@gmail.com', 'password'=>bcrypt('admin')]);
+        DB::table('users')->insert(['id'=> '01', 'name'=>'admin', 'email'=>'admin@gmail.com', 'password'=>bcrypt('admin'), 'is_admin'=>true]);
 
         DB::table('customer')->insert(['id'=> '01', 'customer_name'=>'Adrian Chen', 'lokasi'=>'KM.7', 'nomor_telepon'=>"081274060857"]);
     }
