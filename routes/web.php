@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/customer/create', [CustomerController::class, 'add']); //tambah data pelanggan
     Route::get('/dashboard/customer/get/{id}', [CustomerController::class, 'getData']); //routing ke halaman edit data pelanggan
     Route::post('/dashboard/customer/edit/{id}', [CustomerController::class, 'updateData']); //ubah data pelanggan
-    Route::get('/dashboard/customer/delete/{id}', [CustomerController::class, 'deleteData']);//delete customer
+    Route::post('/dashboard/customer/delete/{id}', [CustomerController::class, 'deleteData']);//delete customer
 
 
     Route::get('/dahsboard/history', [])->name('riwayat');//Menampilkan halaman riwayat

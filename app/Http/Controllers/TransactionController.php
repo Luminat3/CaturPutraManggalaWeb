@@ -121,6 +121,22 @@ class TransactionController extends Controller
         DB::table('transaksi')->where('id', $id)->update(['status' => 1]);
         return redirect()->route('transaction');
     }
+
+    public function deleteTransaksi($id)
+    {
+        // Find the transaksi record
+        $transaksi = Transaksi::find($id);
+
+        if ($transaksi) {
+            // Delete all related detail_transaksi records first
+            $transaksi->detailTransaksis()->delete();
+
+            // Then delete the transaksi record
+            $transaksi->delete();
+        }
+
+        return redirect()->route('transaksi.index');
+    }
 }
 
 //DB::table("Machines")->select(DB::raw('(SUM(cantidad)*SUM(cantidad_actual)) as total'))->get() untuk dapetin total harga modal

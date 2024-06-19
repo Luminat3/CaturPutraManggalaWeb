@@ -51,9 +51,13 @@ class CustomerController extends Controller
 
     public function deleteData($id)
     {
-        $data = Customer::find($id);
-        $data->delete();
-        return redirect()->route('customer');
+        $customer = Customer::find($id);
+        if ($customer) {
+            $customer->transactions()->delete();
+            $customer->delete();
+        }
+    
+        return redirect()->route('customer')->with('success', "Pengguna Berhasil dihapus");
     }
 
 }

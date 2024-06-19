@@ -75,7 +75,7 @@
             <tr>
               <td>
                   <div class="form-group">
-                      <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]">
+                      <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]" required>
                           <option>--Pilih Barang--</option> 
                           @foreach($stock as $st)
                               <option value="{{$st['id']}}">{{$st['nama_barang']}}</option> 
@@ -86,7 +86,7 @@
 
               <td>
                   <div class="form-group">
-                      <input type="number" class="form-control" id="inputJumlah" name="input[0][jumlah]" placeholder="Jumlah ">
+                      <input type="number" class="form-control" id="inputJumlah" name="input[0][jumlah]" placeholder="Jumlah " required>
                   </div>
               </td>
                 
@@ -99,7 +99,7 @@
           <div class="form-group">
               <label for="exampleInputFile">Bukti Terima Barang :  <a class="text-danger">*</a></label>
               <div class="mb-3">
-                  <input type="file" class="form-control-input" id="image_bukti" name="image_bukti">
+                  <input type="file" class="form-control-input" id="image_bukti" name="image_bukti" accept="image/*">
               </div>
           </div>
 
@@ -139,17 +139,17 @@
         <div class="modal-body">
           <div class="form-group">
               <label for="inputPelanggan">Nama Barang</label>
-              <input type="text" class="form-control" id="inputBarang" name="nama_barang" placeholder="Masukkan nama Barang">
+              <input type="text" class="form-control" id="inputBarang" name="nama_barang" placeholder="Masukkan nama Barang" required>
           </div>
 
           <div class="form-group">
               <label for="inputAlamat">Jumlah Awal Barang</label>
-              <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Masukkan Jumlah Barang">
+              <input type="number" class="form-control" id="inputJumlah" name="jumlah" placeholder="Masukkan Jumlah Barang" required>
           </div>
 
           <div class="form-group">
               <label for="inputAlamat">Harga Modal</label>
-              <input type="number" class="form-control" id="inputHargaModal" name="harga_modal" placeholder="Masukkan Harga Modal Barang">
+              <input type="number" class="form-control" id="inputHargaModal" name="harga_modal" placeholder="Masukkan Harga Modal Barang" required>
           </div>
           <div class="form-check">
               <input type="checkbox" class="form-check-input" id="is_unlimited" name = "is_unlimited" value = true>

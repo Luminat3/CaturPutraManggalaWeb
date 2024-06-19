@@ -10,4 +10,10 @@ class Customer extends Model
     protected $table = 'customer';
 
     protected $guarded = [];
+
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaksi::class, 'id_customer', 'id');
+    }
 }
