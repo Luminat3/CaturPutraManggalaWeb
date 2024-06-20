@@ -29,7 +29,7 @@
                 <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalConfirm">Selesaikan Transaksi</button>
             
             @else
-                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Cetak Invoice</button>
+                <a class="btn btn-primary my-2" href="/dashboard/transaction/invoice/{{$transaksi['id']}}">Cetak Invoice</a>
             @endif
             
 

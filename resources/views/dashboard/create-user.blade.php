@@ -9,9 +9,15 @@
 @section('content')
 <div class="card">
     {{-- Error Handling --}}
-    @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
-            {!! implode('', $errors->all(':message')) !!}
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
     @endif
                 <!-- /.card-header -->

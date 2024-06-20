@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/transaction/detail/{id}/add', [TransactionController::class, 'create_akumulasi']);
     Route::post('/dashboard/transaction/detail/{id}/selesai', [TransactionController::class, 'finish_transaction']);
 
+    Route::get('/dashboard/transaction/invoice/{id}',[TransactionController::class, 'show_invoice_form'])->name('invoice');
+    Route::post('/dashboard/transaction/invoice/{id}/update',[TransactionController::class, 'save_price']);
+
     Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer'); //routing ke lihat data pelanggan
     Route::get('/dashboard/customer/create', [CustomerController::class, 'create_view']); //routing ke halaman tambah data pelanggan
     Route::post('/dashboard/customer/create', [CustomerController::class, 'add']); //tambah data pelanggan
@@ -55,6 +58,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/customer/edit/{id}', [CustomerController::class, 'updateData']); //ubah data pelanggan
     Route::post('/dashboard/customer/delete/{id}', [CustomerController::class, 'deleteData']);//delete customer
 
+    Route::get('/dashboard/settings', [DashboardController::class, 'show_settings']); // Menampilkan halaman settings
+    Route::post('/dashboard/settings/update', [DashboardController::class, 'update_settings'])->name('update_settings');//update halaman settings
 
     Route::get('/dahsboard/history', [])->name('riwayat');//Menampilkan halaman riwayat
 

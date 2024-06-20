@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
-    
+
     public function show(): View
     {
         $transaction = Transaksi::where('status', 0)->get();
@@ -77,11 +77,11 @@ class TransactionController extends Controller
         try{
             foreach ($request->input as $key => $value) {
                 $stock = Stock::find($value['id_barang']);
-                
+
                 if (!$stock) {
                     return redirect()->route('detail_transaksi', $id)->with("error", "Barang dengan ID {$value['id_barang']} tidak ditemukan.");
                 }
-        
+
                 if (!$stock->is_unlimited && $stock->jumlah < $value['jumlah']) {
                     return redirect()->route('detail_transaksi', $id)->with("error", "Jumlah stok barang {$stock->nama_barang} tidak mencukupi.");
                 }
@@ -111,7 +111,7 @@ class TransactionController extends Controller
         }
         catch (\Exception $e) {
             DB::rollBack();
-    
+
             return redirect()->route('detail_transaksi', $id)->with("error", $e->getMessage());
         }
     }
@@ -136,6 +136,45 @@ class TransactionController extends Controller
         }
 
         return redirect()->route('transaksi.index');
+    }
+
+    public function show_invoice_form($id): View
+    {
+        // $detailTransaksi = DetailTransaksi::all()->groupBy('nama_barang');
+        // dd($detailTransaksi['Papan Panel']->sum('jumlah'));
+        $detailTransaksi = DetailTransaksi::query()
+            ->addSelect('nama_barang', DB::raw('SUM(jumlah) as jumlah'))
+            ->where('id_transaksi', $id)
+            ->groupBy('nama_barang')
+            ->get();
+
+        return view('dashboard.transaction.invoice', ['detailTransaksi' => $detailTransaksi, 'data' => $id]);
+    }
+
+    public function save_price(Request $request ,$id){
+        $request->validate([
+            'nama_barang' => 'required|array',
+            'nama_barang.*' => 'required|string',
+            'jumlah' => 'required|array',
+            'jumlah.*' => 'required|integer',
+            'harga_pcs' => 'required|array',
+            'harga_pcs.*' => 'required|numeric'
+        ]);
+        $nama_barang = $request->input('nama_barang');
+        $harga_pcs = $request->input('harga_pcs');
+
+        for ($i = 0; $i < count($nama_barang); $i++) {
+            // Cari data di tabel detail_transaksi berdasarkan nama_barang dan jumlah
+            $detail = DetailTransaksi::where('id_transaksi', $id)
+                                        ->where('nama_barang', $nama_barang[$i]);
+            if ($detail) {
+                // Jika data ditemukan, update harga
+                $detail->update([
+                    'harga_jual' => $harga_pcs[$i]
+                ]);
+            }
+        }
+        return redirect()->route('transaction');
     }
 }
 

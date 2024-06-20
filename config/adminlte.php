@@ -361,6 +361,9 @@ return [
             'icon' => 'fas fa-user-plus',
             'onlyAdmin' => 'true'
         ],
+        [   'text' => 'Settings',
+            'url' => '/dashboard/settings',
+            'icon' => 'fas fa-cog' ]
         
         // [
         //     'text' => 'multilevel',

@@ -12,7 +12,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>{{ $total_customer['total']}}</h3>  
+          <h3>{{ $total_customer['total']}}</h3>
 
           <p>Jumlah Customer</p>
         </div>
@@ -24,7 +24,7 @@
     </div>
     <!-- ./col -->
 
-    
+
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-success">
@@ -108,11 +108,11 @@
   </div>
 
 </div>
-  
 
 
-  
-  
+
+
+
 @stop
 
 @section('css')
@@ -122,5 +122,5 @@
 
 @section('js')
   <script src="{{$chart->cdn()}}"></script>
-  {{$chart -> script()}}    
-@stop 
+  {{$chart -> script()}}
+@stop
