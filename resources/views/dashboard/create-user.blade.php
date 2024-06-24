@@ -29,8 +29,8 @@
             <th class="col-2">ID User</th>
             <th class="col-2">Nama</th>
             <th class="col-3">Email</th>
-            <th class="col-2">Role</th> 
-            <th class="col-4">Edit/Delete</th>
+            <th class="col-2">Role</th>
+            <th class="col-4">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -46,8 +46,10 @@
                     @endif
                 </td>
                 <td>
-                    <a href="/dashboard/user/update/{{$user->id}}" class="btn btn-warning">Edit</a>
-                    <a href="/dashboard/user/delete/{{$user->id}}" class="btn btn-danger">Delete</a>
+                    <form action="/dashboard/user/{{$user->id}}/delete" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach
@@ -78,12 +80,12 @@
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama User">
                 </div>
-            
+
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email User">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password User">

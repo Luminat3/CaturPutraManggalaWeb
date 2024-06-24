@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/stock/decrease', [StockController::class, 'decrease']);
 
 
-    Route::get('/dashboard/history', [TransactionController::class, 'show_history']);//menampilkan riwayat transakasi
+    Route::get('/dashboard/history', [TransactionController::class, 'show_history'])->name('riwayat');//menampilkan riwayat transakasi
 
 
     Route::get('/dashboard/transaction', [TransactionController::class, 'show'])->name('transaction');//menampilkan halaman pembuatan transaksi
@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/transaction/detail/{id}/selesai', [TransactionController::class, 'finish_transaction']);
 
     Route::get('/dashboard/transaction/invoice/{id}',[TransactionController::class, 'show_invoice_form'])->name('invoice');
+    Route::get('/dashboard/transaction/invoice/{id}/create',[TransactionController::class, 'create_invoice'])->name('cetak_invoice');
     Route::post('/dashboard/transaction/invoice/{id}/update',[TransactionController::class, 'save_price']);
 
     Route::get('/dashboard/customer', [CustomerController::class, 'index'])->name('customer'); //routing ke lihat data pelanggan
@@ -61,8 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/settings', [DashboardController::class, 'show_settings']); // Menampilkan halaman settings
     Route::post('/dashboard/settings/update', [DashboardController::class, 'update_settings'])->name('update_settings');//update halaman settings
 
-    Route::get('/dahsboard/history', [])->name('riwayat');//Menampilkan halaman riwayat
-
 
     Route::get('/dashboard/akumulasi', [AkumulasiController::class, 'show']); //menampilkan halaman akumulasi untuk per proyek
     Route::post('/dashboard/akumulasi/create', [AkumulasiController::class, 'create']); //menampilkan halaman akumulasi untuk per proyek
@@ -70,7 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/user/', [ProfileController::class, 'show'])->name('user');
     Route::post('/dashboard/user/create', [ProfileController::class, 'create']);
     Route::patch('/dashboard/user/{id}/update', [ProfileController::class, 'update_user']);
-    Route::delete('/dashboard/user/{id}/delete', [ProfileController::class, 'destroy_user']);
+    Route::post('/dashboard/user/{id}/delete', [ProfileController::class, 'delete_user']);
 });
 
 require __DIR__.'/auth.php';

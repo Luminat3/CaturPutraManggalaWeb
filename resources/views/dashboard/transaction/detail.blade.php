@@ -27,11 +27,11 @@
             @if ($transaksi['status'] == false)
                 <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ModalCenter">Tambah Pengeluaran Akumulasi</button>
                 <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalConfirm">Selesaikan Transaksi</button>
-            
             @else
-                <a class="btn btn-primary my-2" href="/dashboard/transaction/invoice/{{$transaksi['id']}}">Cetak Invoice</a>
+                <a class="btn btn-primary my-2" href="/dashboard/transaction/invoice/{{$transaksi['id']}}">Input Harga Penjualan</a>
+                <a class="btn btn-primary my-2" href="/dashboard/transaction/invoice/{{$transaksi['id']}}/create">Cetak Invoice</a>
             @endif
-            
+
 
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -39,6 +39,11 @@
                         <th>Nama Barang</th>
                         <th>Jumlah</th>
                         <th>Harga Modal / pcs</th>
+                        @if ($transaksi['status'] == false)
+
+                        @else
+                            <th>Harga Jual / pcs</th>
+                        @endif
                         <th>Tanggal Keluar</th>
                     </tr>
                 </thead>
@@ -48,6 +53,11 @@
                             <td>{{$data['nama_barang']}}</td>
                             <td>{{$data['jumlah']}}</td>
                             <td>{{$data ->formatRupiah('harga_modal')}}</td>
+                            @if ($transaksi['status'] == false)
+
+                            @else
+                                <td>{{$data -> formatRupiah('harga_jual')}}</td>
+                            @endif
                             <td>{{$data['created_at']}}</td>
                         </tr>
                     @endforeach
@@ -56,7 +66,8 @@
             <table class ="table table-bordered">
                 <tr>
                     <td><h5>Total Modal</h5></td>
-                    <td>Rp{{$modal['modal']}}</td>
+                    <td>Rp {{ number_format($modal, 0) }}</td>
+
                 </tr>
             </table>
         </div>
@@ -74,9 +85,9 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    
+
                 <form action="/dashboard/transaction/detail/{{$transaksi -> id}}/add" method="POST" enctype="multipart/form-data">
-                    @csrf    
+                    @csrf
                     <div class="modal-body">
                         <a class="btn btn-success my-2" id="tambah_barang">Tambah Item</a>
                         <table id="tabel_barang" class="table border-0">
@@ -86,7 +97,7 @@
                                         <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]">
                                             <option value="">--Pilih Barang--</option>
                                             @foreach($stock as $st)
-                                                <option value="{{$st['id']}}"> {{$st['nama_barang']}} - Tersedia : 
+                                                <option value="{{$st['id']}}"> {{$st['nama_barang']}} - Tersedia :
                                                     @if ($st->unlimited_supply)
                                                         Unlimited Supply
                                                     @else
@@ -129,7 +140,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>    
+                    </div>
                     <div class="modal-body">
                     <h4>Apakah anda ingin menyelesaikan transaksi ?</h4>
                     <h4>Pastikan semua barang yang diinput sudah sesuai.</h4>
@@ -144,7 +155,7 @@
                     </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
 
@@ -157,9 +168,9 @@
                     <td>
                         <div class="form-group">
                             <select class="custom-select rounded-0" id="namaBarang" name="input[${i}][id_barang]">
-                                <option>--Pilih Barang--</option> 
+                                <option>--Pilih Barang--</option>
                                 @foreach($stock as $st)
-                                    <option value="{{$st['id']}}">{{$st['nama_barang']}} - Tersedia : 
+                                    <option value="{{$st['id']}}">{{$st['nama_barang']}} - Tersedia :
                                         @if ($st->unlimited_supply)
                                             Unlimited Supply
                                         @else
@@ -167,7 +178,7 @@
                                         @endif
                                     </option>
                                 @endforeach
-                            </select>   
+                            </select>
                         </div>
                     </td>
 
@@ -176,7 +187,7 @@
                             <input type="number" class="form-control" id="inputJumlah" name="input[${i}][jumlah]" placeholder="Jumlah ">
                         </div>
                     </td>
-                    
+
                     <td>
                     <a type="button" class="btn btn-danger remove-table-row">X</a>
                     </td>

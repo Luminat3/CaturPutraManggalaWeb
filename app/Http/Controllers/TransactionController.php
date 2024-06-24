@@ -9,7 +9,14 @@ use App\Models\Customer;
 use App\Models\DetailTransaksi;
 use App\Models\HistoryBarang;
 use App\Models\Transaksi;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Number;
+use mpdfform;
+use Riskihajar\Terbilang\Facades\Terbilang;
+
+
 
 class TransactionController extends Controller
 {
@@ -47,15 +54,15 @@ class TransactionController extends Controller
 
 
 
+
     public function show_detail($id): View
     {
         $transaction = Transaksi::find($id);
         $stock = Stock::all();
         $data = DetailTransaksi::query()->where('id_transaksi', $transaction['id'])->get();
-        $total_modal['modal']= DB::table('detail_transaksi') ->where('id_transaksi', $transaction['id'])->sum(DB::raw('jumlah * harga_modal'));
+        $total_modal= DB::table('detail_transaksi') ->where('id_transaksi', $transaction['id'])->sum(DB::raw('jumlah * harga_modal'));
         return view('dashboard.transaction.detail', ["data" => $data, "stock" => $stock, "transaksi"=>$transaction, 'modal' => $total_modal]);
     }
-
 
     public function create_akumulasi(Request $request, $id)
     {
@@ -174,8 +181,44 @@ class TransactionController extends Controller
                 ]);
             }
         }
-        return redirect()->route('transaction');
+        return redirect()->route('riwayat');
     }
+
+
+    public function create_invoice($id){
+        ini_set('max_execution_time', 300);
+
+        $detailTransaksi = DetailTransaksi::select(
+            'id_transaksi',
+            'nama_barang',
+            DB::raw('SUM(jumlah) as total_jumlah'),
+            DB::raw('SUM(jumlah * harga_jual) as total_harga'),
+            'harga_jual'
+        )
+        ->where('id_transaksi', $id)
+        ->groupBy('id_transaksi', 'nama_barang', 'harga_jual')
+        ->get();
+
+
+        // Hitung grand total
+        $grandTotal = $detailTransaksi->sum('total_harga');
+        Config::set('terbilang.locale', 'id');
+        $terbilang = Terbilang::make($grandTotal);
+        $transaksi = Transaksi::where('id', $id)->first();
+        $customer = Customer::where('id', $transaksi['id_customer'])->first();
+
+        $a = ['detailTransaksi' => $detailTransaksi,
+                'grandTotal' =>$grandTotal,
+                'terbilang' =>$terbilang,
+                'transaksi' =>$transaksi,
+                'customer' =>$customer,
+        ];
+
+        $pdf = PDF::loadView('dashboard.invoice-template', $a) ->setPaper('a4', 'portrait');
+        return $pdf->download('invoice'. $transaksi['nama_customer'] . '.pdf');
+        // return view('dashboard.invoice-template', compact('detailTransaksi', 'grandTotal', 'transaksi', 'customer', 'terbilang'));
+    }
+
 }
 
 //DB::table("Machines")->select(DB::raw('(SUM(cantidad)*SUM(cantidad_actual)) as total'))->get() untuk dapetin total harga modal

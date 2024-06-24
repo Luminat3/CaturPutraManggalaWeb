@@ -21,7 +21,7 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
-    
+
     /**
      * Creating user's profile information.
      */
@@ -39,18 +39,18 @@ class ProfileController extends Controller
                 'password' => 'Password Tidak Boleh Kosong',
             ]
         );
-        
+
         $user = $request->user();
         if ($user && $user->isDirty('email')) {
             $user->email_verified_at = null;
         }
-        
+
         $user['is_admin'] = $request->has('is_admin') ? 1 : 0;
 
         // if ($validatedData->user()->isDirty('email')) {
         //     $validatedData->user()->email_verified_at = null;
         // }
-        
+
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         User::create($validatedData);
@@ -99,5 +99,13 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function delete_user($id){
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+        }
+        return redirect()->route('user')->with('success', "Pengguna Berhasil dihapus");
     }
 }
