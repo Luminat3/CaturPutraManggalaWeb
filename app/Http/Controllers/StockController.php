@@ -15,7 +15,7 @@ class StockController extends Controller
         $stock_barang = Stock::all();
         return view('dashboard.stock.index', ['stock'=>$stock_barang]);
     }
-    
+
     public function create_view(): View
     {
         return view('dashboard.stock.create');
@@ -25,12 +25,13 @@ class StockController extends Controller
     {
         $request->validate(
             [
-                "nama_barang" => "required",
+                "nama_barang" => "required|string|max:70",
                 "jumlah" => "required",
                 "harga_modal" => "required"
             ],
             [
-                "nama_barang" => "Nama Barang Tidak Boleh Kosong",
+                'nama_barang.required' => 'Nama pelanggan wajib diisi.',
+                'nama_barang.max' => 'Nama pelanggan tidak boleh lebih dari 40 karakter.',
                 "jumlah" => "Jumlah Barang tidak boleh kosong",
                 "harga_modal" => "Harga Modal Tidak Boleh Kosong"
             ]
@@ -67,7 +68,7 @@ class StockController extends Controller
         foreach ($request->input as $key => $value) {
             $nama_barang = Stock::query()->where('id', $value['id_barang'])->pluck('nama_barang')->first();
             $value['nama_barang'] = $nama_barang;
-            Stock::where('id', $value['id_barang'])->increment("jumlah", $value['jumlah']); 
+            Stock::where('id', $value['id_barang'])->increment("jumlah", $value['jumlah']);
 
             $historyData = [
                 'id_barang' => $value['id_barang'],
@@ -76,7 +77,7 @@ class StockController extends Controller
                 'image_bukti' => $request->file('image_bukti')->store('bukti', 'public'), // assuming you want to store the image and save the path
                 'keterangan' => $request['keterangan']
             ];
-            
+
             HistoryBarang::create($historyData);
         }
 
@@ -104,11 +105,11 @@ class StockController extends Controller
 
         foreach ($request->inputPengurangan as $key => $value) {
             $stock = Stock::find($value['id_barang']);
-            
+
             if (!$stock) {
                 return redirect()->route('stocks')->with("error", "Barang dengan ID {$value['id_barang']} tidak ditemukan.");
             }
-    
+
             if (!$stock->is_unlimited && $stock->jumlah < $value['jumlah']) {
                 return redirect()->route('stocks')->with("error", "Jumlah stok barang {$stock->nama_barang} tidak mencukupi.");
             }
@@ -122,7 +123,7 @@ class StockController extends Controller
                 'jumlah' => $value['jumlah'],
                 'keterangan' => $request['keterangan']
             ];
-            
+
             HistoryBarang::create($historyData);
             if ($stock['is_unlimited'] == false) {
                 Stock::where('id', $value['id_barang'])->decrement("jumlah", $value['jumlah']);
@@ -136,6 +137,6 @@ class StockController extends Controller
 
         return redirect()->route('stocks')->with("error", $e->getMessage());
     }
-    
+
     }
 }

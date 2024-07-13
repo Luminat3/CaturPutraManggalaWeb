@@ -9,6 +9,9 @@
 
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
   @if (session('success'))
         <div class="alert alert-success">
@@ -22,15 +25,25 @@
         </div>
     @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
   <div class="card">
     <!-- /.card-header -->
     <div class="card-body">
-      
+
       <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#modalTambahStock">Tambah Stock</button>
       <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#modalTambahItem">Tambah Jenis Barang</button>
       <button type="button" class="btn btn-warning my-2" data-toggle="modal" data-target="#modalProduksi">Pengurangan Barang</button>
       <a class="btn btn-secondary my-2" href="/dashboard/stock/history">History</a>
-      <table id="stockTable" class="table table-bordered table-hover">
+      <table id="myTable" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th>Id Barang</th>
@@ -76,11 +89,11 @@
               <td>
                   <div class="form-group">
                       <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]" required>
-                          <option>--Pilih Barang--</option> 
+                          <option>--Pilih Barang--</option>
                           @foreach($stock as $st)
-                              <option value="{{$st['id']}}">{{$st['nama_barang']}}</option> 
+                              <option value="{{$st['id']}}">{{$st['nama_barang']}}</option>
                           @endforeach
-                      </select>   
+                      </select>
                   </div>
               </td>
 
@@ -89,7 +102,7 @@
                       <input type="number" class="form-control" id="inputJumlah" name="input[0][jumlah]" placeholder="Jumlah " required>
                   </div>
               </td>
-                
+
               <td>
               <a type="button" class="btn btn-danger invisible">X</a>
               </td>
@@ -104,7 +117,7 @@
           </div>
 
           <div class="form-group">
-            <label for="exampleInputFile">Keterangan</label> 
+            <label for="exampleInputFile">Keterangan</label>
                 <div class="custom-file">
                     <input type="text" class="form-control" id="inputKeterangan" name="keterangan" placeholder="Keterangan">
                 </div>
@@ -190,11 +203,11 @@
               <td>
                   <div class="form-group">
                       <select class="custom-select rounded-0" id="namaBarang" name="inputPengurangan[0][id_barang]">
-                          <option>--Pilih Barang--</option> 
+                          <option>--Pilih Barang--</option>
                           @foreach($stock as $sto)
-                              <option value="{{$sto['id']}}">{{$sto['nama_barang']}}</option> 
+                              <option value="{{$sto['id']}}">{{$sto['nama_barang']}}</option>
                           @endforeach
-                      </select>   
+                      </select>
                   </div>
               </td>
 
@@ -203,7 +216,7 @@
                       <input type="number" class="form-control" id="inputJumlah" name="inputPengurangan[0][jumlah]" placeholder="Jumlah ">
                   </div>
               </td>
-                
+
               <td>
               <a type="button" class="btn btn-danger invisible">X</a>
               </td>
@@ -211,7 +224,7 @@
           </table>
 
           <div class="form-group">
-            <label for="exampleInputFile">Keterangan</label> 
+            <label for="exampleInputFile">Keterangan</label>
                 <div class="custom-file">
                     <input type="text" class="form-control" id="inputKeterangan" name="keterangan" placeholder="Keterangan">
                 </div>
@@ -230,6 +243,17 @@
 
 
 {{-- Script Untuk Repeater --}}
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script>
+        $('#myTable').DataTable( {
+            order: []
+        } );
+
+        let table = new DataTable('#myTable');
+    </script>
+
   <script>
         var i = 0;
         $('#tambah_barang').click(function(){
@@ -239,11 +263,11 @@
                         <td>
                             <div class="form-group">
                                 <select class="custom-select rounded-0" id="namaBarang" name="input[${i}][id_barang]">
-                                    <option>--Pilih Barang--</option> 
+                                    <option>--Pilih Barang--</option>
                                     @foreach($stock as $stoc)
-                                        <option value="{{$stoc['id']}}" >{{$stoc['nama_barang']}}</option> 
+                                        <option value="{{$stoc['id']}}" >{{$stoc['nama_barang']}}</option>
                                     @endforeach
-                                </select>   
+                                </select>
                             </div>
                         </td>
 
@@ -252,7 +276,7 @@
                                 <input type="number" class="form-control" id="inputJumlah" name="input[${i}][jumlah]" placeholder="Jumlah ">
                             </div>
                         </td>
-                        
+
                         <td>
                         <a type="button" class="btn btn-danger remove-table-row">X</a>
                         </td>
@@ -273,11 +297,11 @@
                         <td>
                             <div class="form-group">
                                 <select class="custom-select rounded-0" id="namaBarang" name="inputPengurangan[${j}][id_barang]">
-                                    <option>--Pilih Barang--</option> 
+                                    <option>--Pilih Barang--</option>
                                     @foreach($stock as $s)
-                                        <option value="{{$s['id']}}" >{{$s['nama_barang']}}</option> 
+                                        <option value="{{$s['id']}}" >{{$s['nama_barang']}}</option>
                                     @endforeach
-                                </select>   
+                                </select>
                             </div>
                         </td>
 
@@ -286,7 +310,7 @@
                                 <input type="number" class="form-control" id="inputJumlah" name="inputPengurangan[${j}][jumlah]" placeholder="Jumlah ">
                             </div>
                         </td>
-                        
+
                         <td>
                         <a type="button" class="btn btn-danger remove-table-row">X</a>
                         </td>

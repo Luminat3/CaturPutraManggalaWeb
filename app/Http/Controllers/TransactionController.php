@@ -23,7 +23,7 @@ class TransactionController extends Controller
 
     public function show(): View
     {
-        $transaction = Transaksi::where('status', 0)->get();
+        $transaction = Transaksi::where('status', 0)->orderBy('created_at', 'desc')->get();
         $customer = Customer::all();
         return view('dashboard.transaction.index', ['transaction' => $transaction, 'customer'=>$customer]);
     }
@@ -32,7 +32,7 @@ class TransactionController extends Controller
 
     public function show_history(): View
     {
-        $transaction = Transaksi::where('status', 1)->get();
+        $transaction = Transaksi::where('status', 1)->orderBy('updated_at', 'desc')->get();
         return view('dashboard.history.index', ['transaction' => $transaction]);
     }
 

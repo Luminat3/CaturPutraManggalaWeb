@@ -12,6 +12,11 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
+
+    public function getUser()
+    {
+        return auth()->user();
+    }
     /**
      * Display the user's profile form.
      */
@@ -59,6 +64,14 @@ class ProfileController extends Controller
     }
 
     public function show (){
+        /** @var \App\Models\User **/
+        $session = $this->getUser();
+
+        if(!$session || !$session->isAdmin())
+        {
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses untuk melihat data user');
+        }
+
         $user = User::all();
         return view('dashboard.create-user', ['user'=>$user]);
     }

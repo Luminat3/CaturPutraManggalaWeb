@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customer', function (Blueprint $table) {
-            $table->id();
-            $table->string('customer_name', 40);
-            $table->string('lokasi', 70);
-            $table->string('nomor_telepon', 15);
-            $table->timestamps();
+        Schema::table('customer', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer');
+        Schema::table('customer', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 };

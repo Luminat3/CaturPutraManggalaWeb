@@ -21,19 +21,31 @@ class CustomerController extends Controller
 
     public function add(Request $request)
     {
-        $request->validate(
+        $validatedData = $request->validate(
             [
-                "customer_name"=>"required",
-                "lokasi"=>"required",
-                "nomor_telepon"=>"required",
+                "customer_name"=>"required|string|max:40",
+                "lokasi"=>"required|string|max:70",
+                "nomor_telepon"=>"required|string|max:15",
             ],
             [
-                "customer_name"=>"Nama Pelanggan Tidak Boleh Kosong",
-                "lokasi"=>"Lokasi Tidak Boleh Kosong",
-                "nomor_telepon"=>"Nomor Telepon Tidak Boleh Kosong",
+                'customer_name.required' => 'Nama pelanggan wajib diisi.',
+                'customer_name.max' => 'Nama pelanggan tidak boleh lebih dari 40 karakter.',
+                'lokasi.required' => 'Lokasi wajib diisi.',
+                'lokasi.max' => 'Lokasi tidak boleh lebih dari 50 karakter.',
+                'nomor_telepon.required' => 'Nomor telepon wajib diisi.',
+                'nomor_telepon.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
             ]);
-        Customer::create($request->all());
-        return redirect()->route('customer')->with("success","Customer telah ditambahkan");
+
+
+            try {
+                // Masukkan data ke dalam database
+                Customer::create($validatedData);
+
+                return redirect()->route('customer')->with("success","Customer telah ditambahkan");
+            } catch (\Exception $e) {
+                // Tangani kesalahan database
+                return redirect()->back()->with("error", "Gagal menambahkan pelanggan: " . $e->getMessage());
+            }
     }
 
     public function getData($id)
@@ -52,11 +64,13 @@ class CustomerController extends Controller
     public function deleteData($id)
     {
         $customer = Customer::find($id);
-        if ($customer) {
-            $customer->transactions()->delete();
-            $customer->delete();
+
+        if($customer->trashed()){
+            $customer->forceDelete();
         }
-    
+
+        $customer->delete();
+
         return redirect()->route('customer')->with('success', "Pengguna Berhasil dihapus");
     }
 

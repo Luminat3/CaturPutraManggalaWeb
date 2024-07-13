@@ -3,32 +3,36 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Pelanggan</h1>
+    <h1>Tambah Pelanggan</h1>
 @stop
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-        <h3 class="card-title">Tambah Pelanggan</h3>
+    {{-- Error Handling --}}
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
                 <!-- /.card-header -->
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title"></h3>
-            </div>
 
-            {{-- Error Handling --}}
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
             <!-- form start -->
             <form action="/dashboard/customer/create" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -59,7 +63,6 @@
                 </div>
             </form>
         </div>
-    </div>
 @stop
 
 

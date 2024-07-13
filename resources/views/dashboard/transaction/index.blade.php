@@ -7,16 +7,17 @@
 @stop
 
 @section('content')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
-    
 
     <div class="card card-primary">
         <!-- .card-body -->
         <div class="card-body">
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#modalTransaksiBaru">Buat Transaksi Baru</button>
 
-            <table id="tableTransaksi" class="table table-bordered table-hover">
+            <table id="myTable" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th class="col-2">ID Pelanggan</th>
@@ -82,9 +83,14 @@
     </div>
 
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script>
+        $('#myTable').DataTable( {
+            order: []
+        } );
 
-
+        let table = new DataTable('#myTable');
     </script>
 @stop
 
@@ -93,7 +99,7 @@
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
-{{-- 
+{{--
 @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
 @stop  --}}

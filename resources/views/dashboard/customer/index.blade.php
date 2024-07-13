@@ -51,10 +51,10 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
-              </div>    
+              </div>
               <div class="modal-body">
               <h4>Apakah anda ingin menghapus customer ini ?</h4>
-              <h4>Jika customer ini dihapus, maka semua data Transaksi yang pernah dilakukan dengan customer ini juga akan dihapus!</h4>
+              <h4>Jika customer ini dihapus, Semua transaksi yang pernah dilakukan masih akan tersimpan.</h4>
               </div>
 
               <div class="modal-footer">
@@ -66,7 +66,7 @@
               </div>
       </div>
   </div>
-</div>    
+</div>
 @stop
 
 
