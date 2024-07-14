@@ -56,9 +56,30 @@ class CustomerController extends Controller
 
     public function updateData(Request $request, $id)
     {
-        $data = Customer::find($id);
-        $data->update($request->all());
-        return redirect()->route('customer');
+        $validatedData = $request->validate(
+            [
+                "customer_name"=>"required|string|max:40",
+                "lokasi"=>"required|string|max:70",
+                "nomor_telepon"=>"required|string|max:15",
+            ],
+            [
+                'customer_name.required' => 'Nama pelanggan wajib diisi.',
+                'customer_name.max' => 'Nama pelanggan tidak boleh lebih dari 40 karakter.',
+                'lokasi.required' => 'Lokasi wajib diisi.',
+                'lokasi.max' => 'Lokasi tidak boleh lebih dari 50 karakter.',
+                'nomor_telepon.required' => 'Nomor telepon wajib diisi.',
+                'nomor_telepon.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
+            ]);
+
+            try{
+                $data = Customer::find($id);
+                $data->update($validatedData);
+                return redirect()->route('customer')->with('success', 'Data pelanggan berhasil diperbarui.');
+            } catch (\Exception $e){
+                return redirect()->back()->with("error", "Gagal menambahkan pelanggan: " . $e->getMessage());
+            }
+
+
     }
 
     public function deleteData($id)
