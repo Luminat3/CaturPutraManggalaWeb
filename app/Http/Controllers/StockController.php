@@ -55,12 +55,14 @@ class StockController extends Controller
             [
                 'input.*.id_barang' => 'required',
                 'input.*.jumlah' => 'required',
-                'image_bukti' => 'required',
+                'image_bukti' => 'required|image|max:10240',
             ],
             [
                 'input.*.id_barang' => 'Barang Tidak Boleh Kosong',
                 'input.*.jumlah' => 'Jumlah Tidak Boleh Kosong',
-                'image_bukti' => 'Masukkan Bukti Penambahan Barang',
+                'image_bukti.required' => 'Masukkan Bukti Penambahan Barang',
+                'image_bukti.image' => 'File harus berupa gambar',
+                'image_bukti.max' => 'Ukuran gambar tidak boleh lebih dari 10MB',
                 'input.*.jumlah.integer' => 'Jumlah harus berupa angka',
                 'input.*.jumlah.min' => 'Jumlah minimal adalah 1',
             ]

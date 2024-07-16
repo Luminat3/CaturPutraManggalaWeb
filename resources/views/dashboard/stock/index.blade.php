@@ -89,7 +89,7 @@
               <td>
                   <div class="form-group">
                       <select class="custom-select rounded-0" id="namaBarang" name="input[0][id_barang]" required>
-                          <option>--Pilih Barang--</option>
+                          <option selected disabled value="">--Pilih Barang--</option>
                           @foreach($stock as $st)
                               <option value="{{$st['id']}}">{{$st['nama_barang']}}</option>
                           @endforeach
@@ -110,7 +110,7 @@
           </table>
 
           <div class="form-group">
-              <label for="exampleInputFile">Bukti Terima Barang :  <a class="text-danger">*</a></label>
+              <label for="exampleInputFile">Bukti Terima Barang :  <a class="text-danger">*</a> (File Gambar, Max 10 MB)</label>
               <div class="mb-3">
                   <input type="file" class="form-control-input" id="image_bukti" name="image_bukti" accept="image/*">
               </div>
@@ -202,8 +202,8 @@
             <tr>
               <td>
                   <div class="form-group">
-                      <select class="custom-select rounded-0" id="namaBarang" name="inputPengurangan[0][id_barang]">
-                          <option>--Pilih Barang--</option>
+                      <select class="custom-select rounded-0" id="namaBarang" name="inputPengurangan[0][id_barang]" required>
+                          <option selected disabled value="">--Pilih Barang--</option>
                           @foreach($stock as $sto)
                               <option value="{{$sto['id']}}">{{$sto['nama_barang']}}</option>
                           @endforeach
@@ -262,7 +262,7 @@
                 `<tr>
                         <td>
                             <div class="form-group">
-                                <select class="custom-select rounded-0" id="namaBarang" name="input[${i}][id_barang]">
+                                <select class="custom-select rounded-0" id="namaBarang" name="input[${i}][id_barang]" required>
                                     <option>--Pilih Barang--</option>
                                     @foreach($stock as $stoc)
                                         <option value="{{$stoc['id']}}" >{{$stoc['nama_barang']}}</option>
@@ -296,7 +296,7 @@
                 `<tr>
                         <td>
                             <div class="form-group">
-                                <select class="custom-select rounded-0" id="namaBarang" name="inputPengurangan[${j}][id_barang]">
+                                <select class="custom-select rounded-0" id="namaBarang" name="inputPengurangan[${j}][id_barang]" required>
                                     <option>--Pilih Barang--</option>
                                     @foreach($stock as $s)
                                         <option value="{{$s['id']}}" >{{$s['nama_barang']}}</option>

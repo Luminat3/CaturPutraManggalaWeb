@@ -306,10 +306,10 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'Search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'Search',
+        // ],
         [
             'text' => 'blog',
             'url' => 'admin/blog',
@@ -317,7 +317,7 @@ return [
         ],
         // [
         //     'text' => 'pages',
-        //     'url' => 'admin/pages',  
+        //     'url' => 'admin/pages',
         //     'icon' => 'far fa-fw fa-file',
         //     'label' => 4,
         //     'label_color' => 'success',
@@ -332,7 +332,7 @@ return [
         //     'text' => 'Pengeluaran Akumulasi',
         //     'icon' => 'fas fa-fw fa-cart-plus',
         //     'url' => 'dashboard/akumulasi',
-        // ],  
+        // ],
         [
             'text' => 'Transaksi',
             'icon' => 'fas fa-cart-plus',
@@ -364,7 +364,7 @@ return [
         [   'text' => 'Settings',
             'url' => '/dashboard/settings',
             'icon' => 'fas fa-cog' ]
-        
+
         // [
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',
@@ -403,7 +403,7 @@ return [
         //         ],
         //     ],
         // ],
-        
+
     ],
 
     /*

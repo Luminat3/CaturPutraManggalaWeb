@@ -7,16 +7,17 @@
 @stop
 
 @section('content')
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 
 
     <div class="card">
                 <!-- /.card-header -->
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="myTable" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>ID Barang</th>
@@ -35,7 +36,7 @@
                             <td>{{$data['keterangan']}}</td>
                             <td>
                                 @if ($data['image_bukti'] == null)
-        
+
                                 @else
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pictureModal" onclick="openModal('{{ url('storage/'.$data->image_bukti) }}')">
                                        Buka Bukti Transaksi
@@ -49,6 +50,16 @@
         </div>
                 <!-- /.card-body -->
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script>
+        $('#myTable').DataTable( {
+            order: []
+        } );
+
+        let table = new DataTable('#myTable');
+    </script>
 @stop
 
 
@@ -80,6 +91,8 @@
       document.getElementById('pictureModalLabel').textContent = 'Bukti Transaksi';
     }
   </script>
+
+
 
 @section('css')
     {{-- Add here extra stylesheets --}}
